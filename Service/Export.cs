@@ -13,9 +13,6 @@ namespace JournalVoucherAudit.Service
 {
     public class Export
     {
-
-        private static string foottext = "注：{0}贷方本月发生额={1}贷方合计 - 收到财政授权支付资金额度";
-
         /// <summary>
         /// 修改第一个sheet的名称
         /// </summary>
@@ -42,78 +39,63 @@ namespace JournalVoucherAudit.Service
 
 
         /// <summary>
-        /// 导出并保存
+        /// 导出保存
         /// </summary>
-        /// <param name="filename">保存文件名，包含路径</param>
-        /// <param name="reportTitles">报表中的title</param>
-        /// <param name="caiWuTotal">财务累计</param>
-        /// <param name="guoKuTotal">国库累计</param>
-        /// <param name="tiaoJieBiao">调节表</param>
-        public void Save(string filename, Tuple<string, string, string> reportTitles, double caiWuTotal, double guoKuTotal, IEnumerable<TiaoJieItem> tiaoJieBiao)
+        /// <param name="filename">文件名</param>
+        /// <param name="salaries">异动工资记录，包含上月与本月</param>
+        /// <param name="lastTotal">上月应发合计</param>
+        /// <param name="currentTotal">本月应发合计</param>
+        public void Save(string filename, IEnumerable<Salary> salaries, Dictionary<string, decimal> salaryStatistics)
         {
             // 项目启动时，添加
             Configurator.Put(".xlsx", new WorkbookLoader());
-            //创建excel参数容器
-            //var workbookParameterContainer = new WorkbookParameterContainer();
+            // 获取当前运行目录
             var path = System.AppDomain.CurrentDomain.BaseDirectory;
 
-            //var file = File.AppendText(System.AppDomain.CurrentDomain.BaseDirectory + "log.txt");
-            //file.WriteLine(path);
-            //file.Close();
+            var tiaoJieItems = salaries as IList<Salary> ?? salaries.ToList();
+            //计算本月异动记录的各项小计
+            var current = tiaoJieItems.Where(t => t.Status == MonthStatus.Current).ToList();
+            //岗位工资
+            var positionTotal = current.Sum(t => t.Position);
+            //薪级工资
+            var scaleTotal = current.Sum(t => t.Scale);
+            //基础绩效工资
+            var performanceTotal = current.Sum(t => t.Performance);
+            //月度奖励绩效
+            var monthlyRewardTotal = current.Sum(t => t.MonthlyReward);
 
-            //workbookParameterContainer.Load(path + @"Template\Template.xml");
-            //创建sheet的参数容器
-            //var sheetParameterContainer = workbookParameterContainer["直内"];
-            //计算小计
-            var tiaoJieItems = tiaoJieBiao as IList<TiaoJieItem> ?? tiaoJieBiao.ToList();
-            var caiWuSubTotal = tiaoJieItems.Sum(t => t.CreditAmount);
-            var guoKuSubTotal = tiaoJieItems.Sum(t => t.Amount);
             //对账日期
-            //文件名包含了报表日期，如：2020年3月-授权非税-财务国库对账单
-            //因文件名使用绝对路径，所以先取文件名
-            //文件名采用日期-科目-报表名的固定样式，日期取第一段
-            var reportFilename = filename.Split('\\').Last();
-            var tempDate = reportFilename.Split('-').First();
-            var voucherDate = tempDate.ToDateTime();
             //月份的最后一天
-            var lastDayOfMonth = voucherDate.LastDayOfMonth();
-
-            //调节表title
-            var title = reportTitles.Item1.Split('_').LastOrDefault();
+            var lastDayOfMonth = DateTime.Today.LastDayOfMonth();
 
             //输出excel
-            ExportHelper.ExportToLocal(path + @"Template\Template.xlsx", filename,
-                new SheetRenderer("直内",
-                    new ParameterRenderer("Title", title),
-                    new ParameterRenderer("CaiWuTitle", reportTitles.Item1),
-                    new ParameterRenderer("GuoKuTitle", reportTitles.Item2),
+            ExportHelper.ExportToLocal(path + @"Template\Template_new.xlsx", filename,
+                new SheetRenderer("工资调节表",
                     new ParameterRenderer("CurrentDate", lastDayOfMonth.ToLongDateString()),//格式为2019年12月31日
-                    new ParameterRenderer("CaiWuTotal", caiWuTotal),
-                    new ParameterRenderer("GuoKuTotal", guoKuTotal),
-                    new ParameterRenderer("CaiWuSubTotal", caiWuSubTotal),
-                    new ParameterRenderer("GuoKuSubTotal", guoKuSubTotal),
-                    new ParameterRenderer("CaiWuBalance", caiWuTotal - caiWuSubTotal),
-                    new ParameterRenderer("GuoKuBalance", guoKuTotal - guoKuSubTotal),
-                    //new ParameterRenderer("FootText", string.Format(foottext, reportTitles.Item1, reportTitles.Item1)),
-                    new RepeaterRenderer<TiaoJieItem>("Reconciliation", tiaoJieItems,
-                        // 财务，已入账未付款
-                        // 日期，凭证号，摘要，金额
-                        new ParameterRenderer<TiaoJieItem>("VoucherDate", t => t.VoucherDate),
-                        new ParameterRenderer<TiaoJieItem>("VoucherNumber", t => t.VoucherNumber),
-                        new ParameterRenderer<TiaoJieItem>("Remark", t => t.Remark),
-                        new ParameterRenderer<TiaoJieItem>("CreditAmount", t => t.CreditAmount),
-                        // 国库，已付款未入账
-                        // 日期，摘要，金额
-                        new ParameterRenderer<TiaoJieItem>("CreateDate", t => t.CreateDate),
-                        new ParameterRenderer<TiaoJieItem>("RemarkReason", t => t.RemarkReason),
-                        new ParameterRenderer<TiaoJieItem>("Amount", t => t.Amount),
-                        new ParameterRenderer<TiaoJieItem>("PaymentNumber", t=>t.PaymentNumber)
+                    new ParameterRenderer("LastTotal", salaryStatistics["last_total"]),
+                    new ParameterRenderer("CurrentTotal", salaryStatistics["current_total"]),
+                    new ParameterRenderer("PositionTotal", positionTotal),
+                    new ParameterRenderer("ScaleTotal", scaleTotal),
+                    new ParameterRenderer("PerformanceTotal", performanceTotal),
+                    new ParameterRenderer("MonthlyRewardTotal", monthlyRewardTotal),
+                    new ParameterRenderer("PayableTotal", salaryStatistics["current_subtotal"]),
+                    new ParameterRenderer("LastPayableBalance", salaryStatistics["last_balance"]),
+                    new ParameterRenderer("CurrentPayableBalance", salaryStatistics["current_balance"]),
+                    new RepeaterRenderer<Salary>("Reconciliation", tiaoJieItems,
+                        // 部门 人员代码 姓名 月度 岗位工资 薪级工资 基础绩效工资 月度奖励工资 应发工资  工资变更状态   
+                        new ParameterRenderer<Salary>("DepartmentName", t => t.DepartmentName),
+                        new ParameterRenderer<Salary>("UserId", t => t.UserId),
+                        new ParameterRenderer<Salary>("UserName", t => t.UserName),
+                        new ParameterRenderer<Salary>("Status", t => t.Status.GetDescription()),//== MonthStatus.Current ? "本月" : (t.Status == MonthStatus.Last ? "上月" : "未知")),
+                        new ParameterRenderer<Salary>("Position", t => t.Position),
+                        new ParameterRenderer<Salary>("Scale", t => t.Scale),
+                        new ParameterRenderer<Salary>("Performance", t => t.Performance),
+                        new ParameterRenderer<Salary>("MonthlyReward", t => t.MonthlyReward),
+                        new ParameterRenderer<Salary>("Payable", t => t.Payable),
+                        new ParameterRenderer<Salary>("ChangedStatus", t => t.ChangedStatus.GetDescription())
                         )
                     )
                 );
-            //修改sheetname
-            SetSheetName(filename, reportTitles.Item3);
         }
-
     }
 }

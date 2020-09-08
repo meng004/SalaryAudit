@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_Caution = new System.Windows.Forms.Label();
@@ -38,32 +37,32 @@
             this.txt_CaiWuFilePath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgv_GuoKu = new System.Windows.Forms.DataGridView();
-            this.PaymentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemarkReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_Message = new System.Windows.Forms.Label();
             this.btn_Audit = new System.Windows.Forms.Button();
             this.btn_Export = new System.Windows.Forms.Button();
-            this.lbl_Message = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_ChangedCount = new System.Windows.Forms.TextBox();
+            this.txt_newSalariesCount = new System.Windows.Forms.TextBox();
+            this.txt_currentPayable = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_lastPayable = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.chk_AbsWithAmount = new System.Windows.Forms.CheckBox();
-            this.chk_NumberWithSingleRecord = new System.Windows.Forms.CheckBox();
-            this.chk_NumberWithAmount = new System.Windows.Forms.CheckBox();
-            this.chk_NumberAmountAndCount = new System.Windows.Forms.CheckBox();
-            this.chk_AmountWithCount = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dgv_CaiWu = new System.Windows.Forms.DataGridView();
-            this.VoucherNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VoucherDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ChangedStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Performance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MonthlyReward = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Payable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_GuoKu)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CaiWu)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -77,11 +76,12 @@
             this.groupBox1.Controls.Add(this.txt_CaiWuFilePath);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(26, 26);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox1.Controls.Add(this.lbl_Message);
+            this.groupBox1.Location = new System.Drawing.Point(32, 32);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1314, 216);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8);
+            this.groupBox1.Size = new System.Drawing.Size(1642, 270);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "比对数据";
@@ -90,19 +90,19 @@
             // 
             this.lbl_Caution.AutoSize = true;
             this.lbl_Caution.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_Caution.Location = new System.Drawing.Point(14, 166);
-            this.lbl_Caution.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbl_Caution.Location = new System.Drawing.Point(18, 208);
+            this.lbl_Caution.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbl_Caution.Name = "lbl_Caution";
-            this.lbl_Caution.Size = new System.Drawing.Size(607, 33);
+            this.lbl_Caution.Size = new System.Drawing.Size(637, 40);
             this.lbl_Caution.TabIndex = 3;
             this.lbl_Caution.Text = "请先将工资导出文件另存为xls文件";
             // 
             // btn_GuoKuFilePath
             // 
-            this.btn_GuoKuFilePath.Location = new System.Drawing.Point(1152, 96);
-            this.btn_GuoKuFilePath.Margin = new System.Windows.Forms.Padding(6);
+            this.btn_GuoKuFilePath.Location = new System.Drawing.Point(1440, 120);
+            this.btn_GuoKuFilePath.Margin = new System.Windows.Forms.Padding(8);
             this.btn_GuoKuFilePath.Name = "btn_GuoKuFilePath";
-            this.btn_GuoKuFilePath.Size = new System.Drawing.Size(150, 46);
+            this.btn_GuoKuFilePath.Size = new System.Drawing.Size(188, 58);
             this.btn_GuoKuFilePath.TabIndex = 1;
             this.btn_GuoKuFilePath.Text = "选择...";
             this.btn_GuoKuFilePath.UseVisualStyleBackColor = true;
@@ -110,10 +110,10 @@
             // 
             // btn_CaiWuFilePath
             // 
-            this.btn_CaiWuFilePath.Location = new System.Drawing.Point(1152, 38);
-            this.btn_CaiWuFilePath.Margin = new System.Windows.Forms.Padding(6);
+            this.btn_CaiWuFilePath.Location = new System.Drawing.Point(1440, 48);
+            this.btn_CaiWuFilePath.Margin = new System.Windows.Forms.Padding(8);
             this.btn_CaiWuFilePath.Name = "btn_CaiWuFilePath";
-            this.btn_CaiWuFilePath.Size = new System.Drawing.Size(150, 46);
+            this.btn_CaiWuFilePath.Size = new System.Drawing.Size(188, 58);
             this.btn_CaiWuFilePath.TabIndex = 0;
             this.btn_CaiWuFilePath.Text = "选择...";
             this.btn_CaiWuFilePath.UseVisualStyleBackColor = true;
@@ -123,11 +123,11 @@
             // 
             this.txt_GuoKuFilePath.AllowDrop = true;
             this.txt_GuoKuFilePath.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_GuoKuFilePath.Location = new System.Drawing.Point(134, 100);
-            this.txt_GuoKuFilePath.Margin = new System.Windows.Forms.Padding(6);
+            this.txt_GuoKuFilePath.Location = new System.Drawing.Point(168, 125);
+            this.txt_GuoKuFilePath.Margin = new System.Windows.Forms.Padding(8);
             this.txt_GuoKuFilePath.Name = "txt_GuoKuFilePath";
             this.txt_GuoKuFilePath.ReadOnly = true;
-            this.txt_GuoKuFilePath.Size = new System.Drawing.Size(1002, 35);
+            this.txt_GuoKuFilePath.Size = new System.Drawing.Size(1252, 42);
             this.txt_GuoKuFilePath.TabIndex = 1;
             this.txt_GuoKuFilePath.TabStop = false;
             this.txt_GuoKuFilePath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_GuoKuFilePath_DragDrop);
@@ -137,11 +137,11 @@
             // 
             this.txt_CaiWuFilePath.AllowDrop = true;
             this.txt_CaiWuFilePath.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_CaiWuFilePath.Location = new System.Drawing.Point(134, 42);
-            this.txt_CaiWuFilePath.Margin = new System.Windows.Forms.Padding(6);
+            this.txt_CaiWuFilePath.Location = new System.Drawing.Point(168, 52);
+            this.txt_CaiWuFilePath.Margin = new System.Windows.Forms.Padding(8);
             this.txt_CaiWuFilePath.Name = "txt_CaiWuFilePath";
             this.txt_CaiWuFilePath.ReadOnly = true;
-            this.txt_CaiWuFilePath.Size = new System.Drawing.Size(1002, 35);
+            this.txt_CaiWuFilePath.Size = new System.Drawing.Size(1252, 42);
             this.txt_CaiWuFilePath.TabIndex = 1;
             this.txt_CaiWuFilePath.TabStop = false;
             this.txt_CaiWuFilePath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_CaiWuFilePath_DragDrop);
@@ -150,90 +150,42 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 106);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(20, 132);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 24);
+            this.label2.Size = new System.Drawing.Size(133, 30);
             this.label2.TabIndex = 0;
             this.label2.Text = "本月工资";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 48);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(20, 60);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 24);
+            this.label1.Size = new System.Drawing.Size(133, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "上月工资";
             // 
-            // dgv_GuoKu
+            // lbl_Message
             // 
-            this.dgv_GuoKu.AllowUserToAddRows = false;
-            this.dgv_GuoKu.AllowUserToDeleteRows = false;
-            this.dgv_GuoKu.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_GuoKu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_GuoKu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_GuoKu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.PaymentNumber,
-            this.RemarkReason,
-            this.CreateDate,
-            this.Amount
-            });
-            this.dgv_GuoKu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_GuoKu.Location = new System.Drawing.Point(0, 0);
-            this.dgv_GuoKu.Margin = new System.Windows.Forms.Padding(6);
-            this.dgv_GuoKu.Name = "dgv_GuoKu";
-            this.dgv_GuoKu.ReadOnly = true;
-            this.dgv_GuoKu.RowTemplate.Height = 23;
-            this.dgv_GuoKu.Size = new System.Drawing.Size(1044, 674);
-            this.dgv_GuoKu.TabIndex = 0;
-            this.dgv_GuoKu.TabStop = false;
-            // 
-            // PaymentNumber
-            // 
-            this.PaymentNumber.DataPropertyName = "PaymentNumber";
-            this.PaymentNumber.HeaderText = "部门";
-            this.PaymentNumber.Name = "PaymentNumber";
-            this.PaymentNumber.ReadOnly = true;
-            // 
-            // CreateDate
-            // 
-            this.CreateDate.DataPropertyName = "CreateDate";
-            this.CreateDate.HeaderText = "姓名";
-            this.CreateDate.Name = "CreateDate";
-            this.CreateDate.ReadOnly = true;
-            // 
-            // Amount
-            // 
-            this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "应发";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            // 
-            // RemarkReason
-            // 
-            //this.RemarkReason.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.RemarkReason.DataPropertyName = "RemarkReason";
-            this.RemarkReason.HeaderText = "人员代码";
-            this.RemarkReason.Name = "RemarkReason";
-            this.RemarkReason.ReadOnly = true;
+            this.lbl_Message.AutoSize = true;
+            this.lbl_Message.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_Message.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Message.Location = new System.Drawing.Point(1038, 208);
+            this.lbl_Message.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbl_Message.Name = "lbl_Message";
+            this.lbl_Message.Size = new System.Drawing.Size(140, 40);
+            this.lbl_Message.TabIndex = 4;
+            this.lbl_Message.Text = "说明：";
             // 
             // btn_Audit
             // 
             this.btn_Audit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Audit.Location = new System.Drawing.Point(556, 24);
-            this.btn_Audit.Margin = new System.Windows.Forms.Padding(6);
+            this.btn_Audit.Location = new System.Drawing.Point(695, 30);
+            this.btn_Audit.Margin = new System.Windows.Forms.Padding(8);
             this.btn_Audit.Name = "btn_Audit";
-            this.btn_Audit.Size = new System.Drawing.Size(150, 60);
+            this.btn_Audit.Size = new System.Drawing.Size(188, 75);
             this.btn_Audit.TabIndex = 2;
             this.btn_Audit.Text = "核对";
             this.btn_Audit.UseVisualStyleBackColor = true;
@@ -242,213 +194,249 @@
             // btn_Export
             // 
             this.btn_Export.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Export.Location = new System.Drawing.Point(556, 96);
-            this.btn_Export.Margin = new System.Windows.Forms.Padding(6);
+            this.btn_Export.Location = new System.Drawing.Point(695, 120);
+            this.btn_Export.Margin = new System.Windows.Forms.Padding(8);
             this.btn_Export.Name = "btn_Export";
-            this.btn_Export.Size = new System.Drawing.Size(150, 60);
+            this.btn_Export.Size = new System.Drawing.Size(188, 75);
             this.btn_Export.TabIndex = 3;
             this.btn_Export.Text = "导出";
             this.btn_Export.UseVisualStyleBackColor = true;
             this.btn_Export.Click += new System.EventHandler(this.btn_Export_Click);
             // 
-            // lbl_Message
-            // 
-            this.lbl_Message.AutoSize = true;
-            this.lbl_Message.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_Message.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Message.Location = new System.Drawing.Point(12, 166);
-            this.lbl_Message.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbl_Message.Name = "lbl_Message";
-            this.lbl_Message.Size = new System.Drawing.Size(114, 33);
-            this.lbl_Message.TabIndex = 4;
-            this.lbl_Message.Text = "说明：";
-            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txt_ChangedCount);
+            this.groupBox3.Controls.Add(this.txt_newSalariesCount);
+            this.groupBox3.Controls.Add(this.txt_currentPayable);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.txt_lastPayable);
+            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.chk_AbsWithAmount);
-            this.groupBox3.Controls.Add(this.chk_NumberWithSingleRecord);
-            this.groupBox3.Controls.Add(this.chk_NumberWithAmount);
-            this.groupBox3.Controls.Add(this.chk_NumberAmountAndCount);
-            this.groupBox3.Controls.Add(this.chk_AmountWithCount);
-            this.groupBox3.Controls.Add(this.lbl_Message);
             this.groupBox3.Controls.Add(this.btn_Audit);
             this.groupBox3.Controls.Add(this.btn_Export);
-            this.groupBox3.Location = new System.Drawing.Point(1360, 26);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Location = new System.Drawing.Point(1700, 32);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(716, 216);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox3.Size = new System.Drawing.Size(895, 270);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
+            // txt_ChangedCount
+            // 
+            this.txt_ChangedCount.Location = new System.Drawing.Point(189, 181);
+            this.txt_ChangedCount.Name = "txt_ChangedCount";
+            this.txt_ChangedCount.Size = new System.Drawing.Size(323, 42);
+            this.txt_ChangedCount.TabIndex = 7;
+            // 
+            // txt_newSalariesCount
+            // 
+            this.txt_newSalariesCount.Location = new System.Drawing.Point(189, 131);
+            this.txt_newSalariesCount.Name = "txt_newSalariesCount";
+            this.txt_newSalariesCount.Size = new System.Drawing.Size(323, 42);
+            this.txt_newSalariesCount.TabIndex = 7;
+            // 
+            // txt_currentPayable
+            // 
+            this.txt_currentPayable.Location = new System.Drawing.Point(189, 78);
+            this.txt_currentPayable.Name = "txt_currentPayable";
+            this.txt_currentPayable.Size = new System.Drawing.Size(323, 42);
+            this.txt_currentPayable.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 193);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(133, 30);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "变动人数";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 143);
+            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(133, 30);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "新增人数";
+            // 
+            // txt_lastPayable
+            // 
+            this.txt_lastPayable.Location = new System.Drawing.Point(189, 28);
+            this.txt_lastPayable.Name = "txt_lastPayable";
+            this.txt_lastPayable.Size = new System.Drawing.Size(323, 42);
+            this.txt_lastPayable.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 90);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 30);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "本月应发";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 32);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(25, 40);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 24);
+            this.label3.Size = new System.Drawing.Size(133, 30);
             this.label3.TabIndex = 6;
-            this.label3.Text = "生效规则";
-            // 
-            // chk_AbsWithAmount
-            // 
-            this.chk_AbsWithAmount.AutoSize = true;
-            this.chk_AbsWithAmount.Location = new System.Drawing.Point(24, 128);
-            this.chk_AbsWithAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.chk_AbsWithAmount.Name = "chk_AbsWithAmount";
-            this.chk_AbsWithAmount.Size = new System.Drawing.Size(210, 28);
-            this.chk_AbsWithAmount.TabIndex = 5;
-            this.chk_AbsWithAmount.Text = "同凭证多次支付";
-            this.chk_AbsWithAmount.UseVisualStyleBackColor = true;
-            this.chk_AbsWithAmount.CheckedChanged += new System.EventHandler(this.chk_AbsWithAmount_CheckedChanged);
-            // 
-            // chk_NumberWithSingleRecord
-            // 
-            this.chk_NumberWithSingleRecord.AutoSize = true;
-            this.chk_NumberWithSingleRecord.Location = new System.Drawing.Point(24, 95);
-            this.chk_NumberWithSingleRecord.Margin = new System.Windows.Forms.Padding(4);
-            this.chk_NumberWithSingleRecord.Name = "chk_NumberWithSingleRecord";
-            this.chk_NumberWithSingleRecord.Size = new System.Drawing.Size(234, 28);
-            this.chk_NumberWithSingleRecord.TabIndex = 5;
-            this.chk_NumberWithSingleRecord.Text = "单笔凭证号与小计";
-            this.chk_NumberWithSingleRecord.UseVisualStyleBackColor = true;
-            this.chk_NumberWithSingleRecord.CheckedChanged += new System.EventHandler(this.chk_NumberWithSingleRecord_CheckedChanged);
-            // 
-            // chk_NumberWithAmount
-            // 
-            this.chk_NumberWithAmount.AutoSize = true;
-            this.chk_NumberWithAmount.Location = new System.Drawing.Point(265, 95);
-            this.chk_NumberWithAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.chk_NumberWithAmount.Name = "chk_NumberWithAmount";
-            this.chk_NumberWithAmount.Size = new System.Drawing.Size(234, 28);
-            this.chk_NumberWithAmount.TabIndex = 5;
-            this.chk_NumberWithAmount.Text = "单凭证分多笔支付";
-            this.chk_NumberWithAmount.UseVisualStyleBackColor = true;
-            this.chk_NumberWithAmount.CheckedChanged += new System.EventHandler(this.chk_NumberWithAmount_CheckedChanged);
-            // 
-            // chk_NumberAmountAndCount
-            // 
-            this.chk_NumberAmountAndCount.AutoSize = true;
-            this.chk_NumberAmountAndCount.Checked = true;
-            this.chk_NumberAmountAndCount.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_NumberAmountAndCount.Location = new System.Drawing.Point(265, 60);
-            this.chk_NumberAmountAndCount.Margin = new System.Windows.Forms.Padding(4);
-            this.chk_NumberAmountAndCount.Name = "chk_NumberAmountAndCount";
-            this.chk_NumberAmountAndCount.Size = new System.Drawing.Size(282, 28);
-            this.chk_NumberAmountAndCount.TabIndex = 5;
-            this.chk_NumberAmountAndCount.Text = "人员代码、应发金额";
-            this.chk_NumberAmountAndCount.UseVisualStyleBackColor = true;
-            this.chk_NumberAmountAndCount.CheckedChanged += new System.EventHandler(this.chk_NumberAmountAndCount_CheckedChanged);
-            // 
-            // chk_AmountWithCount
-            // 
-            this.chk_AmountWithCount.AutoSize = true;
-            this.chk_AmountWithCount.Checked = true;
-            this.chk_AmountWithCount.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_AmountWithCount.Location = new System.Drawing.Point(24, 60);
-            this.chk_AmountWithCount.Margin = new System.Windows.Forms.Padding(4);
-            this.chk_AmountWithCount.Name = "chk_AmountWithCount";
-            this.chk_AmountWithCount.Size = new System.Drawing.Size(186, 28);
-            this.chk_AmountWithCount.TabIndex = 5;
-            this.chk_AmountWithCount.Text = "金额与记录数";
-            this.chk_AmountWithCount.UseVisualStyleBackColor = true;
-            this.chk_AmountWithCount.CheckedChanged += new System.EventHandler(this.chk_AmountWithCount_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.dgv_GuoKu);
-            this.panel1.Location = new System.Drawing.Point(1056, 254);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1044, 674);
-            this.panel1.TabIndex = 6;
+            this.label3.Text = "上月应发";
             // 
             // dgv_CaiWu
             // 
             this.dgv_CaiWu.AllowUserToAddRows = false;
             this.dgv_CaiWu.AllowUserToDeleteRows = false;
-            this.dgv_CaiWu.AllowUserToOrderColumns = true;
             this.dgv_CaiWu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_CaiWu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Remark,
-            this.VoucherNumber,
-            this.VoucherDate,
-            this.CreditAmount
-            });
+            this.ChangedStatus,
+            this.DepartmentName,
+            this.UserId,
+            this.UserName,
+            this.Status,
+            this.Position,
+            this.Scale,
+            this.Performance,
+            this.MonthlyReward,
+            this.Payable});
             this.dgv_CaiWu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_CaiWu.Location = new System.Drawing.Point(0, 0);
-            this.dgv_CaiWu.Margin = new System.Windows.Forms.Padding(6);
+            this.dgv_CaiWu.Margin = new System.Windows.Forms.Padding(8);
             this.dgv_CaiWu.Name = "dgv_CaiWu";
             this.dgv_CaiWu.ReadOnly = true;
+            this.dgv_CaiWu.RowHeadersWidth = 120;
             this.dgv_CaiWu.RowTemplate.Height = 23;
-            this.dgv_CaiWu.Size = new System.Drawing.Size(1008, 674);
+            this.dgv_CaiWu.Size = new System.Drawing.Size(2563, 787);
             this.dgv_CaiWu.TabIndex = 0;
             this.dgv_CaiWu.TabStop = false;
-            // 
-            // VoucherNumber
-            // 
-            this.VoucherNumber.DataPropertyName = "VoucherNumber";
-            this.VoucherNumber.HeaderText = "人员代码";
-            this.VoucherNumber.Name = "VoucherNumber";
-            this.VoucherNumber.ReadOnly = true;
-            // 
-            // VoucherDate
-            // 
-            this.VoucherDate.DataPropertyName = "VoucherDate";
-            this.VoucherDate.HeaderText = "姓名";
-            this.VoucherDate.Name = "VoucherDate";
-            this.VoucherDate.ReadOnly = true;
-            // 
-            // CreditAmount
-            //
-            this.CreditAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CreditAmount.DataPropertyName = "CreditAmount";
-            this.CreditAmount.HeaderText = "应发";
-            this.CreditAmount.Name = "CreditAmount";
-            this.CreditAmount.ReadOnly = true;
-            // 
-            // Remark
-            // 
-            //this.Remark.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Remark.DataPropertyName = "Remark";
-            this.Remark.HeaderText = "部门";
-            this.Remark.Name = "Remark";
-            this.Remark.ReadOnly = true;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dgv_CaiWu);
-            this.panel2.Location = new System.Drawing.Point(26, 254);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(32, 312);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1008, 674);
+            this.panel2.Size = new System.Drawing.Size(2563, 787);
             this.panel2.TabIndex = 7;
+            // 
+            // ChangedStatus
+            // 
+            this.ChangedStatus.DataPropertyName = "ChangedStatus";
+            this.ChangedStatus.HeaderText = "状态";
+            this.ChangedStatus.MinimumWidth = 12;
+            this.ChangedStatus.Name = "ChangedStatus";
+            this.ChangedStatus.ReadOnly = true;
+            this.ChangedStatus.Width = 50;
+            // 
+            // DepartmentName
+            // 
+            this.DepartmentName.DataPropertyName = "DepartmentName";
+            this.DepartmentName.HeaderText = "部门";
+            this.DepartmentName.MinimumWidth = 12;
+            this.DepartmentName.Name = "DepartmentName";
+            this.DepartmentName.ReadOnly = true;
+            this.DepartmentName.Width = 250;
+            // 
+            // UserId
+            // 
+            this.UserId.DataPropertyName = "UserId";
+            this.UserId.HeaderText = "人员代码";
+            this.UserId.MinimumWidth = 12;
+            this.UserId.Name = "UserId";
+            this.UserId.ReadOnly = true;
+            this.UserId.Width = 250;
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "姓名";
+            this.UserName.MinimumWidth = 12;
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Width = 250;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "月度";
+            this.Status.MinimumWidth = 12;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Width = 50;
+            // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "Position";
+            this.Position.HeaderText = "岗位工资";
+            this.Position.MinimumWidth = 12;
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            this.Position.Width = 250;
+            // 
+            // Scale
+            // 
+            this.Scale.DataPropertyName = "Scale";
+            this.Scale.HeaderText = "薪级工资";
+            this.Scale.MinimumWidth = 12;
+            this.Scale.Name = "Scale";
+            this.Scale.ReadOnly = true;
+            this.Scale.Width = 250;
+            // 
+            // Performance
+            // 
+            this.Performance.DataPropertyName = "Performance";
+            this.Performance.HeaderText = "基础绩效工资";
+            this.Performance.MinimumWidth = 12;
+            this.Performance.Name = "Performance";
+            this.Performance.ReadOnly = true;
+            this.Performance.Width = 250;
+            // 
+            // MonthlyReward
+            // 
+            this.MonthlyReward.DataPropertyName = "MonthlyReward";
+            this.MonthlyReward.HeaderText = "月度奖励绩效";
+            this.MonthlyReward.MinimumWidth = 12;
+            this.MonthlyReward.Name = "MonthlyReward";
+            this.MonthlyReward.ReadOnly = true;
+            this.MonthlyReward.Width = 250;
+            // 
+            // Payable
+            // 
+            this.Payable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Payable.DataPropertyName = "Payable";
+            this.Payable.HeaderText = "应发";
+            this.Payable.MinimumWidth = 12;
+            this.Payable.Name = "Payable";
+            this.Payable.ReadOnly = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2112, 910);
+            this.ClientSize = new System.Drawing.Size(2632, 1116);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.MaximumSize = new System.Drawing.Size(2138, 981);
-            this.MinimumSize = new System.Drawing.Size(1908, 981);
+            this.Margin = new System.Windows.Forms.Padding(8);
+            this.MaximumSize = new System.Drawing.Size(2664, 1204);
+            this.MinimumSize = new System.Drawing.Size(2377, 1204);
             this.Name = "Form1";
             this.Text = "人事-财务工资核对系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_GuoKu)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CaiWu)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -465,28 +453,30 @@
         private System.Windows.Forms.TextBox txt_CaiWuFilePath;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgv_GuoKu;
         private System.Windows.Forms.Button btn_Audit;
         private System.Windows.Forms.Button btn_Export;
         private System.Windows.Forms.Label lbl_Message;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgv_CaiWu;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox chk_AbsWithAmount;
-        private System.Windows.Forms.CheckBox chk_NumberWithAmount;
-        private System.Windows.Forms.CheckBox chk_AmountWithCount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chk_NumberWithSingleRecord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RemarkReason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VoucherNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VoucherDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreditAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remark;
-        private System.Windows.Forms.CheckBox chk_NumberAmountAndCount;
+        private System.Windows.Forms.TextBox txt_ChangedCount;
+        private System.Windows.Forms.TextBox txt_newSalariesCount;
+        private System.Windows.Forms.TextBox txt_currentPayable;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_lastPayable;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ChangedStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Performance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MonthlyReward;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Payable;
     }
 }
 

@@ -12,7 +12,7 @@ namespace JournalVoucherAudit.Service.Tests
         {
             //arrange
             var filePath = @"D:\Codes\10月对账\10月财务\1.XLS";
-            var excelImport = new Import(filePath, 4);
+            var excelImport = new Import(filePath, 2, 2);
             //act
             var actual = excelImport.ReadCaiWu<CaiWuItem>();
             //assert
@@ -24,7 +24,7 @@ namespace JournalVoucherAudit.Service.Tests
         {
             //arrange
             var filePath = @"D:\Codes\10月对账\10月国库\1.XLS";
-            var excelImport = new Import(filePath, 1);
+            var excelImport = new Import(filePath, 2, 2);
             //act
             var actual = excelImport.ReadGuoKu<GuoKuItem>();
 

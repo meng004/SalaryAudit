@@ -28,19 +28,10 @@ namespace JournalVoucherAudit.Domain
         [Description("调整")]
         Regulated,
         /// <summary>
-        /// 停薪
+        /// 退休、停薪、辞职或死亡
         /// </summary>
-        [Description("停薪")]
-        Unpaid,
-        /// <summary>
-        /// 退休
-        /// </summary>
-        [Description("退休")]
+        [Description("退休等")]
         Retired,
-        /// <summary>
-        /// 死亡
-        /// </summary>
-        [Description("死亡")]
-        Departed,
+
     }
 }

@@ -16,9 +16,7 @@ namespace JournalVoucherAudit.WinformsUI
     {
         #region 字段
 
-        private static string caution = "请先将工资导出文件另存为xls文件";
-        private static string post_caution = "调节后余额 {0} 平衡";
-
+        private static string caution = "请使用在职人员工资表.XLS";
         /// <summary>
         /// 报表类型，与配置文件中的key相同
         /// </summary>
@@ -43,68 +41,16 @@ namespace JournalVoucherAudit.WinformsUI
             return result;
         }
         /// <summary>
-        /// 本月应发工资变动记录
-        /// 前面为新增工资账户，后面为现有账户上月与本月工资
+        /// 获取拖放的文件路径
         /// </summary>
-        private SalaryAudit Audit
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private string GetFilePath(DragEventArgs e)
         {
-            get
-            {
-                //对账
-                var audit = new SalaryAudit(LastSalaries, CurrentSalaries);
-                
-                return audit;
-            }
+            //获取文件路径
+            var path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            return path;
         }
-        /// <summary>
-        /// 获取统计量
-        /// 上月应发合计，本月应发合计，上月应发变动合计，本月应发变动合计
-        /// 上月调节余额，本月调余额，本月实发工资异动人数，本页新增工资人数
-        /// </summary>
-        private Dictionary<string, decimal> SalaryStatistics
-        {
-            get
-            {
-                var notEquals = Audit.MashupAll;
-                //上月应发合计
-                var last_total = LastSalaries.Sum(t => t.Payable);
-                //本月应发合计
-                var current_total = CurrentSalaries.Sum(t => t.Payable);
-                //上月应发变动合计
-                var last_subtotal = notEquals.Where(t => t.Status == MonthStatus.Last).Sum(t => t.Payable);
-                //本月应发变动合计
-                var current_subtotal = notEquals.Where(t => t.Status == MonthStatus.Current).Sum(t => t.Payable);
-                //计算调节余额
-                //未出现在本月的上月工资的应发合计
-                var notInCurrent = Audit.NotInCurrent.Sum(t => t.Payable);
-                //上月平衡=上月合计-未出现在本月合计-本月发生异动的上月合计
-                var last_balance = last_total - notInCurrent - last_subtotal;
-
-                //本月新增
-                var newInCurrent = Audit.NewSalaries.Sum(t => t.Payable);
-                //本月平衡=本月合计-本月新增-本月发生异动的本月合计
-                var current_balance = current_total - newInCurrent - current_subtotal;
-                //本月实发工资异动人数
-                var changed_Count = Audit.ChangedByExistId.Item2.Count;
-                //本月新增工资人数
-                var newSalaries_Count = Audit.NewSalaries.Count;
-
-                var dict = new Dictionary<string, decimal>
-                {                    
-                    { "last_total", last_total },
-                    { "current_total", current_total },
-                    { "last_subtotal", last_subtotal },
-                    { "current_subtotal", current_subtotal },
-                    { "last_balance", last_balance },
-                    { "current_balance", current_balance },
-                    { "changed_count", changed_Count },
-                    { "newSalaries_count", newSalaries_Count }
-                };
-
-                return dict;
-            }
-        }
-
         #endregion
 
         #region 属性
@@ -165,6 +111,11 @@ namespace JournalVoucherAudit.WinformsUI
             }
         }
         /// <summary>
+        /// 本月应发工资变动记录
+        /// 前面为新增工资账户，后面为现有账户上月与本月工资
+        /// </summary>
+        private SalaryAudit Audit => new SalaryAudit(LastSalaries, CurrentSalaries);
+        /// <summary>
         /// 读取程序集信息，构造窗体的标题
         /// </summary>
         private string FormTitle
@@ -204,10 +155,9 @@ namespace JournalVoucherAudit.WinformsUI
             //不允许自动生成列
             dgv_CaiWu.AutoGenerateColumns = false;
             //只读
-            txt_ChangedCount.ReadOnly = true;
-            txt_currentPayable.ReadOnly = true;
-            txt_lastPayable.ReadOnly = true;
-            txt_newSalariesCount.ReadOnly = true;
+            txt_news.ReadOnly = true;
+            txt_changed.ReadOnly = true;
+            txt_retired.ReadOnly = true;
         }
 
         #endregion
@@ -235,7 +185,7 @@ namespace JournalVoucherAudit.WinformsUI
         private void txt_CaiWuFilePath_DragDrop(object sender, DragEventArgs e)
         {
             //获取文件路径
-            string path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            string path = GetFilePath(e);
             txt_CaiWuFilePath.Text = path;
         }
         /// <summary>
@@ -275,7 +225,7 @@ namespace JournalVoucherAudit.WinformsUI
         private void txt_GuoKuFilePath_DragDrop(object sender, DragEventArgs e)
         {
             //获取文件路径
-            string path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            string path = GetFilePath(e);
             txt_GuoKuFilePath.Text = path;
         }
 
@@ -301,21 +251,15 @@ namespace JournalVoucherAudit.WinformsUI
             lbl_Message.Text = string.Empty;
 
             //显示
-            txt_lastPayable.Text = SalaryStatistics["last_total"].ToString();
-            txt_currentPayable.Text = SalaryStatistics["current_total"].ToString();
-            txt_ChangedCount.Text = SalaryStatistics["changed_count"].ToString();
-            txt_newSalariesCount.Text = SalaryStatistics["newSalaries_count"].ToString();
-            //是否平衡
-            //var isBalance = (SalaryStatistics["last_balance"] - SalaryStatistics["current_balance"]) < 1e-7m;
-            //设置提示信息
-            //lbl_Caution.Text = string.Format(post_caution, isBalance ? "已" : "未");
-            //lbl_Caution.ForeColor = Color.Red;
+            txt_changed.Text = Audit.ChangedWithSameUserId.Item2.Count.ToString();
+            txt_news.Text = Audit.NewSalaries.Count.ToString();
+            txt_retired.Text = Audit.Retired.Count.ToString();
 
             //关闭操作提示信息
             lbl_Message.Text = string.Empty;
 
             //转换为可排序列表
-            var caiWuSort = new SortableBindingList<Salary>(Audit.MashupAll);
+            var caiWuSort = new SortableBindingList<Balance>(Audit.Mashup);
 
             //绑定数据            
             dgv_CaiWu.DataSource = caiWuSort;//caiWuSort.OrderBy(t => t.CreditAmount).ToList();
@@ -332,7 +276,7 @@ namespace JournalVoucherAudit.WinformsUI
             lbl_Caution.Text = string.Empty;
 
             //取出不符合要求的数据
-            var changed_Salaries = dgv_CaiWu.DataSource as IEnumerable<Salary>;
+            var changed_Salaries = dgv_CaiWu.DataSource as IEnumerable<Balance>;
 
             //检查数据源
             if (changed_Salaries == null)
@@ -340,9 +284,6 @@ namespace JournalVoucherAudit.WinformsUI
                 lbl_Message.Text = Resources.ErrorMessage;
                 return;
             }
-            //获取应发合计
-            var last_total = SalaryStatistics["last_total"];
-            var current_total = SalaryStatistics["current_total"];
             //文件名
             var voucherDate = DateTime.Today;
             var filename = $"{voucherDate.Year}年{voucherDate.Month}月-工资对账单";
@@ -352,8 +293,8 @@ namespace JournalVoucherAudit.WinformsUI
             if (DialogResult.OK.Equals(saveFileDlg.ShowDialog()))
             {
                 //导出excel
-                var export = new Export();
-                export.Save(saveFileDlg.FileName, Audit.MashupAll, SalaryStatistics);
+                var export = new Export(saveFileDlg.FileName, Audit);
+                export.Save();
                 //提示消息
                 lbl_Message.Text = Resources.ResultMessage;
             }
@@ -380,9 +321,6 @@ namespace JournalVoucherAudit.WinformsUI
                 dgv_CaiWu.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
-
-
-
 
         #endregion
 

@@ -41,12 +41,10 @@
             this.btn_Audit = new System.Windows.Forms.Button();
             this.btn_Export = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txt_ChangedCount = new System.Windows.Forms.TextBox();
-            this.txt_newSalariesCount = new System.Windows.Forms.TextBox();
-            this.txt_currentPayable = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txt_retired = new System.Windows.Forms.TextBox();
+            this.txt_news = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txt_lastPayable = new System.Windows.Forms.TextBox();
+            this.txt_changed = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgv_CaiWu = new System.Windows.Forms.DataGridView();
@@ -55,12 +53,10 @@
             this.DepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Performance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonthlyReward = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Payable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CaiWu)).BeginInit();
@@ -81,7 +77,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(8);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(8);
-            this.groupBox1.Size = new System.Drawing.Size(1642, 270);
+            this.groupBox1.Size = new System.Drawing.Size(1642, 242);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "比对数据";
@@ -89,13 +85,13 @@
             // lbl_Caution
             // 
             this.lbl_Caution.AutoSize = true;
-            this.lbl_Caution.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_Caution.Location = new System.Drawing.Point(18, 208);
+            this.lbl_Caution.Font = new System.Drawing.Font("宋体", 12F);
+            this.lbl_Caution.Location = new System.Drawing.Point(18, 186);
             this.lbl_Caution.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbl_Caution.Name = "lbl_Caution";
-            this.lbl_Caution.Size = new System.Drawing.Size(637, 40);
+            this.lbl_Caution.Size = new System.Drawing.Size(457, 40);
             this.lbl_Caution.TabIndex = 3;
-            this.lbl_Caution.Text = "请先将工资导出文件另存为xls文件";
+            this.lbl_Caution.Text = "选择在职人员工资表.XLS";
             // 
             // btn_GuoKuFilePath
             // 
@@ -170,9 +166,9 @@
             // lbl_Message
             // 
             this.lbl_Message.AutoSize = true;
-            this.lbl_Message.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_Message.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.lbl_Message.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Message.Location = new System.Drawing.Point(1038, 208);
+            this.lbl_Message.Location = new System.Drawing.Point(1038, 188);
             this.lbl_Message.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbl_Message.Name = "lbl_Message";
             this.lbl_Message.Size = new System.Drawing.Size(140, 40);
@@ -193,7 +189,7 @@
             // 
             // btn_Export
             // 
-            this.btn_Export.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_Export.Font = new System.Drawing.Font("宋体", 12F);
             this.btn_Export.Location = new System.Drawing.Point(695, 120);
             this.btn_Export.Margin = new System.Windows.Forms.Padding(8);
             this.btn_Export.Name = "btn_Export";
@@ -205,12 +201,10 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txt_ChangedCount);
-            this.groupBox3.Controls.Add(this.txt_newSalariesCount);
-            this.groupBox3.Controls.Add(this.txt_currentPayable);
-            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.txt_retired);
+            this.groupBox3.Controls.Add(this.txt_news);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.txt_lastPayable);
+            this.groupBox3.Controls.Add(this.txt_changed);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btn_Audit);
@@ -219,68 +213,51 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox3.Size = new System.Drawing.Size(895, 270);
+            this.groupBox3.Size = new System.Drawing.Size(895, 242);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
-            // txt_ChangedCount
+            // txt_retired
             // 
-            this.txt_ChangedCount.Location = new System.Drawing.Point(189, 181);
-            this.txt_ChangedCount.Name = "txt_ChangedCount";
-            this.txt_ChangedCount.Size = new System.Drawing.Size(323, 42);
-            this.txt_ChangedCount.TabIndex = 7;
+            this.txt_retired.Location = new System.Drawing.Point(189, 150);
+            this.txt_retired.Name = "txt_retired";
+            this.txt_retired.Size = new System.Drawing.Size(323, 42);
+            this.txt_retired.TabIndex = 7;
             // 
-            // txt_newSalariesCount
+            // txt_news
             // 
-            this.txt_newSalariesCount.Location = new System.Drawing.Point(189, 131);
-            this.txt_newSalariesCount.Name = "txt_newSalariesCount";
-            this.txt_newSalariesCount.Size = new System.Drawing.Size(323, 42);
-            this.txt_newSalariesCount.TabIndex = 7;
-            // 
-            // txt_currentPayable
-            // 
-            this.txt_currentPayable.Location = new System.Drawing.Point(189, 78);
-            this.txt_currentPayable.Name = "txt_currentPayable";
-            this.txt_currentPayable.Size = new System.Drawing.Size(323, 42);
-            this.txt_currentPayable.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 193);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 30);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "变动人数";
+            this.txt_news.Location = new System.Drawing.Point(189, 89);
+            this.txt_news.Name = "txt_news";
+            this.txt_news.Size = new System.Drawing.Size(323, 42);
+            this.txt_news.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 143);
+            this.label5.Location = new System.Drawing.Point(25, 162);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 30);
             this.label5.TabIndex = 6;
-            this.label5.Text = "新增人数";
+            this.label5.Text = "退休人数";
             // 
-            // txt_lastPayable
+            // txt_changed
             // 
-            this.txt_lastPayable.Location = new System.Drawing.Point(189, 28);
-            this.txt_lastPayable.Name = "txt_lastPayable";
-            this.txt_lastPayable.Size = new System.Drawing.Size(323, 42);
-            this.txt_lastPayable.TabIndex = 7;
+            this.txt_changed.Location = new System.Drawing.Point(189, 28);
+            this.txt_changed.Name = "txt_changed";
+            this.txt_changed.Size = new System.Drawing.Size(323, 42);
+            this.txt_changed.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 90);
+            this.label4.Location = new System.Drawing.Point(25, 101);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 30);
             this.label4.TabIndex = 6;
-            this.label4.Text = "本月应发";
+            this.label4.Text = "入职人数";
             // 
             // label3
             // 
@@ -290,7 +267,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(133, 30);
             this.label3.TabIndex = 6;
-            this.label3.Text = "上月应发";
+            this.label3.Text = "变动人数";
             // 
             // dgv_CaiWu
             // 
@@ -302,12 +279,10 @@
             this.DepartmentName,
             this.UserId,
             this.UserName,
-            this.Status,
             this.Position,
             this.Scale,
             this.Performance,
-            this.MonthlyReward,
-            this.Payable});
+            this.MonthlyReward});
             this.dgv_CaiWu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_CaiWu.Location = new System.Drawing.Point(0, 0);
             this.dgv_CaiWu.Margin = new System.Windows.Forms.Padding(8);
@@ -344,7 +319,7 @@
             this.DepartmentName.MinimumWidth = 12;
             this.DepartmentName.Name = "DepartmentName";
             this.DepartmentName.ReadOnly = true;
-            this.DepartmentName.Width = 250;
+            this.DepartmentName.Width = 150;
             // 
             // UserId
             // 
@@ -353,7 +328,7 @@
             this.UserId.MinimumWidth = 12;
             this.UserId.Name = "UserId";
             this.UserId.ReadOnly = true;
-            this.UserId.Width = 250;
+            this.UserId.Width = 150;
             // 
             // UserName
             // 
@@ -362,61 +337,43 @@
             this.UserName.MinimumWidth = 12;
             this.UserName.Name = "UserName";
             this.UserName.ReadOnly = true;
-            this.UserName.Width = 250;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "月度";
-            this.Status.MinimumWidth = 12;
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Width = 50;
+            this.UserName.Width = 150;
             // 
             // Position
             // 
-            this.Position.DataPropertyName = "Position";
-            this.Position.HeaderText = "岗位工资";
-            this.Position.MinimumWidth = 12;
+            this.Position.DataPropertyName = "PayableOfLast";
+            this.Position.HeaderText = "上月应发";
+            this.Position.MinimumWidth = 20;
             this.Position.Name = "Position";
             this.Position.ReadOnly = true;
-            this.Position.Width = 250;
+            this.Position.Width = 150;
             // 
             // Scale
             // 
-            this.Scale.DataPropertyName = "Scale";
-            this.Scale.HeaderText = "薪级工资";
+            this.Scale.DataPropertyName = "PayableOfCurrent";
+            this.Scale.HeaderText = "本月应发";
             this.Scale.MinimumWidth = 12;
             this.Scale.Name = "Scale";
             this.Scale.ReadOnly = true;
-            this.Scale.Width = 250;
+            this.Scale.Width = 150;
             // 
             // Performance
             // 
-            this.Performance.DataPropertyName = "Performance";
-            this.Performance.HeaderText = "基础绩效工资";
+            this.Performance.DataPropertyName = "ActualOfLast";
+            this.Performance.HeaderText = "上月实发";
             this.Performance.MinimumWidth = 12;
             this.Performance.Name = "Performance";
             this.Performance.ReadOnly = true;
-            this.Performance.Width = 250;
+            this.Performance.Width = 150;
             // 
             // MonthlyReward
             // 
-            this.MonthlyReward.DataPropertyName = "MonthlyReward";
-            this.MonthlyReward.HeaderText = "月度奖励绩效";
+            this.MonthlyReward.DataPropertyName = "ActualOfCurrent";
+            this.MonthlyReward.HeaderText = "本月实发";
             this.MonthlyReward.MinimumWidth = 12;
             this.MonthlyReward.Name = "MonthlyReward";
             this.MonthlyReward.ReadOnly = true;
             this.MonthlyReward.Width = 250;
-            // 
-            // Payable
-            // 
-            this.Payable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Payable.DataPropertyName = "Payable";
-            this.Payable.HeaderText = "应发";
-            this.Payable.MinimumWidth = 12;
-            this.Payable.Name = "Payable";
-            this.Payable.ReadOnly = true;
             // 
             // Form1
             // 
@@ -460,23 +417,19 @@
         private System.Windows.Forms.DataGridView dgv_CaiWu;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_ChangedCount;
-        private System.Windows.Forms.TextBox txt_newSalariesCount;
-        private System.Windows.Forms.TextBox txt_currentPayable;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_retired;
+        private System.Windows.Forms.TextBox txt_news;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txt_lastPayable;
+        private System.Windows.Forms.TextBox txt_changed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChangedStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
         private System.Windows.Forms.DataGridViewTextBoxColumn Performance;
         private System.Windows.Forms.DataGridViewTextBoxColumn MonthlyReward;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Payable;
     }
 }
 

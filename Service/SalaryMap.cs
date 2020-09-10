@@ -106,7 +106,7 @@ namespace JournalVoucherAudit.Service
                 .MakeOptional()
                 .WithEmptyFallback(string.Empty)
                 .WithInvalidFallback(string.Empty);
-            Map(salary => salary.Status)
+            Map(salary => salary.MonthStatus)
                 .MakeOptional()
                 .WithEmptyFallback(MonthStatus.Unknown)
                 .WithInvalidFallback(MonthStatus.Unknown);

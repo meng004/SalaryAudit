@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace JournalVoucherAudit.Domain
 {
+    /// <summary>
+    /// 工资
+    /// 默认使用用户ID进行相等比较
+    /// </summary>
     public class Salary : IEquatable<Salary>
     {
-        #region 工资报表映射属性
+        #region 个人基本信息
         /// <summary>
         /// 部门名称
         /// </summary>
@@ -25,6 +29,10 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("姓名")]
         public string UserName { get; set; }
+
+        #endregion
+
+        #region 工资科目
         /// <summary>
         /// 岗位工资
         /// </summary>
@@ -145,7 +153,6 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("实发工资")] 
         public decimal Actual { get; set; }
-
         /// <summary>
         /// 上月其它绩效
         /// </summary>
@@ -156,6 +163,11 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("上月预扣税")]
         public decimal WithholdingTax { get; set; }
+
+        #endregion
+
+        #region 账号
+
         /// <summary>
         /// 账号
         /// </summary>
@@ -173,34 +185,43 @@ namespace JournalVoucherAudit.Domain
         public string FundAccount { get; set; }
         #endregion
 
+        #region 标志
+
         /// <summary>
         /// 月度，上月或本月
         /// </summary>
-        public MonthStatus Status { get; set; }
+        public MonthStatus MonthStatus { get; set; }
 
         /// <summary>
         /// 工资变动理由，新增、调整、退休或离职、死亡等
         /// </summary>
         public ChangedStatus ChangedStatus { get; set; }
 
+        #endregion
+
         #region 实现IEquatable
+
         public override bool Equals(object obj)
         {
             return Equals(obj as Salary);
         }
-
+        /// <summary>
+        /// 使用用户ID进行相等比较
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Salary other)
         {
             return other != null &&
                    UserId == other.UserId;
         }
-
         public override int GetHashCode()
         {
             int hashCode = 356858736;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId);
             return hashCode;
         }
+
         #endregion
     }
 }

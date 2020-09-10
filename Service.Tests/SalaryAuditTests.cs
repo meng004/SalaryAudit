@@ -42,7 +42,7 @@ namespace Service.Tests
         [TestMethod]
         public void NotEqualsWithLastMonth_NotZero()
         {
-            var not_equals = _audit.NotEqualsWithLastMonth;
+            var not_equals = _audit.NotEquals;
             Assert.AreNotEqual(0, not_equals.Item1.Count);
             Assert.AreNotEqual(0, not_equals.Item2.Count);
         }
@@ -50,7 +50,7 @@ namespace Service.Tests
         [TestMethod]
         public void NotEqualsByExistId_NotZero()
         {
-            var not_equals = _audit.ChangedByExistId;
+            var not_equals = _audit.ChangedWithSameUserId;
             Assert.AreNotEqual(0, not_equals.Item1.Count);
             Assert.AreNotEqual(0, not_equals.Item2.Count);
         }
@@ -72,7 +72,7 @@ namespace Service.Tests
         [TestMethod]
         public void MashupAll_NotZero()
         {
-            var all = _audit.MashupAll;
+            var all = _audit.MashupDetailed;
             Assert.AreNotEqual(0, all.Count);
         }
 

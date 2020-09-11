@@ -191,7 +191,10 @@ namespace JournalVoucherAudit.Service
                 var not_equals = ChangedWithSameUserId;
                 //人员ID相同，工资不同
                 //按ID和月度状态排序
-                var result = not_equals.Item1.Concat(not_equals.Item2).OrderBy(t => t.UserId).ThenBy(t => t.MonthStatus).ToList();
+                var result = not_equals.Item1.Concat(not_equals.Item2)
+                                             .OrderBy(t => t.UserId)
+                                             .ThenBy(t => t.MonthStatus)
+                                             .ToList();
 
                 return result;
             }
@@ -239,12 +242,12 @@ namespace JournalVoucherAudit.Service
                 //因为用户关注在职人员，所以对应记录放在最上面，包括变动 + 新入职
                 //新入职按编号排序
                 var balancedWithNew = balanced.Concat(NewSalaries.OrderBy(t => t.DepartmentName)
-                                                                 .ThenBy(t => t.UserId)).ToList();
+                                                                 .ThenBy(t => t.UserId));
                 // + 退休，按部门排序
                 var withRetired = balancedWithNew.Concat(Retired.OrderBy(t => t.DepartmentName)
-                                                                .ThenBy(t => t.UserId)).ToList();
+                                                                .ThenBy(t => t.UserId));
 
-                return withRetired;
+                return withRetired.ToList();
             }
         }
 

@@ -3,7 +3,7 @@
 namespace JournalVoucherAudit.Domain
 {
     /// <summary>
-    /// 工资变动理由，入职、调整、停薪、退休、死亡等
+    /// 工资变动事由，入职、调整、停薪、退休、死亡等
     /// </summary>
     public enum ChangedStatus
     {

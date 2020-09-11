@@ -47,7 +47,10 @@ namespace JournalVoucherAudit.Domain
         /// 姓名
         /// </summary>
         public string UserName { get { return _current.UserName; } }
-
+        /// <summary>
+        /// 工资变动事由
+        /// </summary>
+        public ChangedStatus ChangedStatus { get; set; }
         #endregion
 
         #region 工资

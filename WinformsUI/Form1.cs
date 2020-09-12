@@ -51,6 +51,8 @@ namespace JournalVoucherAudit.WinformsUI
             var path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
             return path;
         }
+
+        
         #endregion
 
         #region 属性
@@ -249,14 +251,20 @@ namespace JournalVoucherAudit.WinformsUI
 
             //重置消息
             lbl_Message.Text = string.Empty;
+            lbl_Caution.Text = string.Empty;
 
             //显示
             txt_changed.Text = Audit.ChangedWithSameUserId.Item2.Count.ToString();
             txt_news.Text = Audit.NewSalaries.Count.ToString();
             txt_retired.Text = Audit.Retired.Count.ToString();
 
-            //关闭操作提示信息
-            lbl_Message.Text = string.Empty;
+            //依据调节后余额是否平衡给出提示
+            var msg = Resources.BalanceMessage;
+            //余额是否平衡
+            if (!Audit.IsBalanced)
+                msg = "不" + msg;
+
+            lbl_Message.Text = msg;
 
             //转换为可排序列表
             var caiWuSort = new SortableBindingList<Balance>(Audit.Mashup);

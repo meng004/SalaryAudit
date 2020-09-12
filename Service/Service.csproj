@@ -93,6 +93,7 @@
     <Compile Include="AmountWithCountAuditForCaiWu.cs" />
     <Compile Include="AmountGroupItem.cs" />
     <Compile Include="AuditBase.cs" />
+    <Compile Include="BalanceExtension.cs" />
     <Compile Include="CaiWuAudit.cs" />
     <Compile Include="CaiWuAuditBase.cs" />
     <Compile Include="ActiveRule.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="NumberWithSingleRecordAuditForGuoKu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaryAudit.cs" />
+    <Compile Include="SalaryExtension.cs" />
     <Compile Include="SalaryImport.cs" />
     <Compile Include="SalaryMap.cs" />
   </ItemGroup>

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Security;
 
 namespace JournalVoucherAudit.Service
 {
@@ -47,45 +48,6 @@ namespace JournalVoucherAudit.Service
 
         #endregion
 
-        #region 累计
-        /// <summary>
-        /// 上月应发总计
-        /// </summary>
-        private decimal TotalPayableOfLast => Audit.Last.Sum(t => t.Payable);
-        /// <summary>
-        /// 本月应发总计
-        /// </summary>
-        private decimal TotalPayableOfCurrent => Audit.Current.Sum(t => t.Payable);
-        /// <summary>
-        /// 上月实发总计
-        /// </summary>
-        private decimal TotalActualOfLast => Audit.Last.Sum(t => t.Actual);
-        /// <summary>
-        /// 本月实发总计
-        /// </summary>
-        private decimal TotalActualOfCurrent => Audit.Current.Sum(t => t.Actual);
-
-        #endregion
-
-        #region 差额累计
-        /// <summary>
-        /// 上月应发
-        /// </summary>
-        private decimal BalancePayableOfLast => Audit.Mashup.Sum(t => t.PayableOfLast);
-        /// <summary>
-        /// 本月应发
-        /// </summary>
-        private decimal BalancePayableOfCurrent => Audit.Mashup.Sum(t => t.PayableOfCurrent);
-        /// <summary>
-        /// 上月实发
-        /// </summary>
-        private decimal BalanceActualOfLast => Audit.Mashup.Sum(t => t.ActualOfLast);
-        /// <summary>
-        /// 本月实发
-        /// </summary>
-        private decimal BalanceActualOfCurrent => Audit.Mashup.Sum(t => t.ActualOfCurrent);
-        #endregion
-
         #region excel表
 
         /// <summary>
@@ -94,17 +56,17 @@ namespace JournalVoucherAudit.Service
         private SheetRenderer Balances => new SheetRenderer("调节表",
                 new ParameterRenderer("CurrentDate", CurrentDate),
                 //累计
-                new ParameterRenderer("TotalPayableOfLast", TotalPayableOfLast),
-                new ParameterRenderer("TotalPayableOfCurrent", TotalPayableOfCurrent),
-                new ParameterRenderer("TotalActualOfLast", TotalActualOfLast),
-                new ParameterRenderer("TotalActualOfCurrent", TotalActualOfCurrent),
+                new ParameterRenderer("TotalPayableOfLast", Audit.Last.TotalPayable()),
+                new ParameterRenderer("TotalPayableOfCurrent", Audit.Current.TotalPayable()),
+                new ParameterRenderer("LastBalanced", Audit.Last.TotalPayable() - Audit.Mashup.BalancePayableOfLast()),
+                new ParameterRenderer("CurrentBalanced", Audit.Current.TotalPayable() - Audit.Mashup.BalancePayableOfCurrent()),
                 //差额累计
-                new ParameterRenderer("BalancePayableOfLast", BalancePayableOfLast),
-                new ParameterRenderer("BalancePayableOfCurrent", BalancePayableOfCurrent),
-                new ParameterRenderer("BalanceActualOfLast", BalanceActualOfLast),
-                new ParameterRenderer("BalanceActualOfCurrent", BalanceActualOfCurrent),
+                new ParameterRenderer("BalancePayableOfLast", Audit.Mashup.BalancePayableOfLast()),
+                new ParameterRenderer("BalancePayableOfCurrent", Audit.Mashup.BalancePayableOfCurrent()),
+                new ParameterRenderer("BalanceActualOfLast", Audit.Mashup.BalanceActualOfLast()),
+                new ParameterRenderer("BalanceActualOfCurrent", Audit.Mashup.BalanceActualOfCurrent()),
                 new RepeaterRenderer<Balance>("Reconciliation", Audit.Mashup,
-                    new ParameterRenderer<Balance>("ChangedStatus", t => t.Current.ChangedStatus.GetDescription()),
+                    new ParameterRenderer<Balance>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
                     new ParameterRenderer<Balance>("DepartmentName", t => t.DepartmentName),
                     new ParameterRenderer<Balance>("UserId", t => t.UserId),
                     new ParameterRenderer<Balance>("UserName", t => t.UserName),
@@ -122,7 +84,7 @@ namespace JournalVoucherAudit.Service
                         // 标志   
                         new ParameterRenderer<Salary>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
                         new ParameterRenderer<Salary>("MonthStatus", t => t.MonthStatus.GetDescription()),//== MonthStatus.Current ? "本月" : (t.MonthStatus == MonthStatus.Last ? "上月" : "未知")),
-                        //人员基本信息
+                                                                                                          //人员基本信息
                         new ParameterRenderer<Salary>("DepartmentName", t => t.DepartmentName),
                         new ParameterRenderer<Salary>("UserId", t => t.UserId),
                         new ParameterRenderer<Salary>("UserName", t => t.UserName),
@@ -202,7 +164,7 @@ namespace JournalVoucherAudit.Service
             // 项目启动时，添加
             Configurator.Put(".xlsx", new WorkbookLoader());
             //输出excel
-            ExportHelper.ExportToLocal(TemplateFile, Filename, Balances,Details);
+            ExportHelper.ExportToLocal(TemplateFile, Filename, Balances, Details);
         }
 
     }

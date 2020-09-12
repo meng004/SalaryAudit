@@ -38,19 +38,50 @@ namespace JournalVoucherAudit.Domain
         /// <summary>
         /// 部门名称
         /// </summary>
-        public string DepartmentName { get { return _current.DepartmentName; } }
+        public string DepartmentName => _current.MonthStatus == MonthStatus.Unknown 
+                                                             ? _last.DepartmentName 
+                                                             : _current.DepartmentName;
+
         /// <summary>
         /// 人员代码
         /// </summary>
-        public string UserId { get { return _current.UserId; } }
+        public string UserId => _current.MonthStatus == MonthStatus.Unknown
+                                                     ? _last.UserId
+                                                     : _current.UserId;
         /// <summary>
         /// 姓名
         /// </summary>
-        public string UserName { get { return _current.UserName; } }
+        public string UserName => _current.MonthStatus == MonthStatus.Unknown
+                                                       ? _last.UserName
+                                                       : _current.UserName;
         /// <summary>
         /// 工资变动事由
         /// </summary>
-        public ChangedStatus ChangedStatus { get; set; }
+        public ChangedStatus ChangedStatus
+        {
+            get
+            {
+                //如果退休
+                if (_current.ChangedStatus == ChangedStatus.Unknown)
+                    return _last.ChangedStatus;
+                else
+                    return _current.ChangedStatus;
+            }
+        }
+        /// <summary>
+        /// 月度状态，本月或上月
+        /// </summary>
+        public MonthStatus  MonthStatus
+        {
+            get
+            {
+                //如果退休
+                if (_current.MonthStatus==MonthStatus.Unknown)
+                    return _last.MonthStatus;
+                else
+                    return _current.MonthStatus;
+            }
+        }
         #endregion
 
         #region 工资
@@ -87,9 +118,10 @@ namespace JournalVoucherAudit.Domain
             {
                 var salary = new Salary
                 {
-                    UserId = _current.UserId,
-                    UserName = _current.UserName,
-                    DepartmentName = _current.DepartmentName,
+                    UserId = this.UserId,
+                    UserName = this.UserName,
+                    DepartmentName = this.DepartmentName,
+                    //应发
                     Position = _current.Position - _last.Position,
                     Scale = _current.Scale - _last.Scale,
                     Performance = _current.Performance - _last.Performance,
@@ -118,8 +150,8 @@ namespace JournalVoucherAudit.Domain
                     PerformanceOfLastMonth = _current.PerformanceOfLastMonth - _last.PerformanceOfLastMonth,
                     WithholdingTax = _current.WithholdingTax - _last.WithholdingTax,
                     //状态标志
-                    MonthStatus = _current.MonthStatus,
-                    ChangedStatus = _current.ChangedStatus
+                    MonthStatus = this.MonthStatus,
+                    ChangedStatus = this.ChangedStatus
                 };
                 return salary;
             }

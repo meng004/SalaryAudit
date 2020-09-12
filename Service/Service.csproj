@@ -86,31 +86,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbsAmountGroupItem.cs" />
-    <Compile Include="AbsWithAmountForCaiWu.cs" />
-    <Compile Include="AbsWithAmountForGuoKu.cs" />
-    <Compile Include="AmountWithCountAuditForGuoKu.cs" />
-    <Compile Include="AmountWithCountAuditForCaiWu.cs" />
-    <Compile Include="AmountGroupItem.cs" />
-    <Compile Include="AuditBase.cs" />
     <Compile Include="BalanceExtension.cs" />
-    <Compile Include="CaiWuAudit.cs" />
-    <Compile Include="CaiWuAuditBase.cs" />
-    <Compile Include="ActiveRule.cs" />
-    <Compile Include="GuoKuAudit.cs" />
-    <Compile Include="GuoKuAuditBase.cs" />
-    <Compile Include="DefaultAuditForCaiWu.cs" />
-    <Compile Include="DefaultAuditForGuoKu.cs" />
-    <Compile Include="NumberAmountAndCountAuditForCaiWu.cs" />
-    <Compile Include="NumberAmountAndCountAuditForGuoKu.cs" />
-    <Compile Include="NumberAmountGroupItem.cs" />
-    <Compile Include="NumberGroupItem.cs" />
-    <Compile Include="Import.cs" />
     <Compile Include="Export.cs" />
-    <Compile Include="NumberWithAmountAuditForCaiWu.cs" />
-    <Compile Include="NumberWithAmountAuditForGuoKu.cs" />
-    <Compile Include="NumberWithSingleRecordAuditForCaiWu.cs" />
-    <Compile Include="NumberWithSingleRecordAuditForGuoKu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaryAudit.cs" />
     <Compile Include="SalaryExtension.cs" />

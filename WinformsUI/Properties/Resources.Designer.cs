@@ -61,6 +61,15 @@ namespace JournalVoucherAudit.WinformsUI.Properties {
         }
         
         /// <summary>
+        ///   查找类似 平衡 的本地化字符串。
+        /// </summary>
+        internal static string BalanceMessage {
+            get {
+                return ResourceManager.GetString("BalanceMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请检查数据文件 的本地化字符串。
         /// </summary>
         internal static string ErrorMessage {

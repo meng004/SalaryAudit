@@ -17,6 +17,8 @@ namespace JournalVoucherAudit.Service
     public class Export
     {
         #region 属性
+
+        private string _template = @"Template\Template_2.xlsx";
         /// <summary>
         /// 模板文件
         /// </summary>
@@ -27,7 +29,7 @@ namespace JournalVoucherAudit.Service
                 // 获取当前运行目录
                 var path = System.AppDomain.CurrentDomain.BaseDirectory;
                 //excel模板
-                var templateFile = path + @"Template\Template_new.xlsx";
+                var templateFile = path + _template;
                 return templateFile;
             }
         }

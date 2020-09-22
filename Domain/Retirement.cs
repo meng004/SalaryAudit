@@ -12,7 +12,6 @@ namespace JournalVoucherAudit.Domain
     /// </summary>
     public class Retirement : User
     {
-
         #region 工资科目
         /// <summary>
         /// 基本离退休费

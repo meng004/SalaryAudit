@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace JournalVoucherAudit.Domain
 {
     /// <summary>
-    /// 工资
+    /// 在职人员工资
     /// 默认使用用户ID进行相等比较
     /// </summary>
     public class Salary : User

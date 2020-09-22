@@ -56,9 +56,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balance.cs" />
+    <Compile Include="BalanceOfRetirement.cs" />
+    <Compile Include="BalanceOfSalary.cs" />
     <Compile Include="ChangedStatus.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="MonthStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retirement.cs" />
     <Compile Include="Salary.cs" />
     <Compile Include="SalaryEqualityComparerWithPayable.cs" />
   </ItemGroup>

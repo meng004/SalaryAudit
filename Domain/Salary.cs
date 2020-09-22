@@ -11,26 +11,26 @@ namespace JournalVoucherAudit.Domain
     /// 工资
     /// 默认使用用户ID进行相等比较
     /// </summary>
-    public class Salary : IEquatable<Salary>
+    public class Salary : User
     {
-        #region 个人基本信息
-        /// <summary>
-        /// 部门名称
-        /// </summary>
-        [ExcelColumnName("部门名称")]
-        public string DepartmentName { get; set; }
-        /// <summary>
-        /// 人员代码
-        /// </summary>
-        [ExcelColumnName("人员代码")]
-        public string UserId { get; set; }
-        /// <summary>
-        /// 姓名
-        /// </summary>
-        [ExcelColumnName("姓名")]
-        public string UserName { get; set; }
+        //#region 个人基本信息
+        ///// <summary>
+        ///// 部门名称
+        ///// </summary>
+        //[ExcelColumnName("部门名称")]
+        //public string DepartmentName { get; set; }
+        ///// <summary>
+        ///// 人员代码
+        ///// </summary>
+        //[ExcelColumnName("人员代码")]
+        //public string UserId { get; set; }
+        ///// <summary>
+        ///// 姓名
+        ///// </summary>
+        //[ExcelColumnName("姓名")]
+        //public string UserName { get; set; }
 
-        #endregion
+        //#endregion
 
         #region 工资科目
         /// <summary>
@@ -78,16 +78,16 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("百分之十")]
         public decimal TenPercent { get; set; }
-        /// <summary>
-        /// 护教
-        /// </summary>
-        [ExcelColumnName("护教")]
-        public decimal ProtectingEducation { get; set; }
-        /// <summary>
-        /// 特贴
-        /// </summary>
-        [ExcelColumnName("特贴")]
-        public decimal SpecialSubsidy { get; set; }
+        ///// <summary>
+        ///// 护教
+        ///// </summary>
+        //[ExcelColumnName("护教")]
+        //public decimal ProtectingEducation { get; set; }
+        ///// <summary>
+        ///// 特贴
+        ///// </summary>
+        //[ExcelColumnName("特贴")]
+        //public decimal SpecialSubsidy { get; set; }
         /// <summary>
         /// 国防津贴
         /// </summary>
@@ -103,16 +103,16 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("临聘专业技术人员绩效")]
         public decimal PerformanceOfTemporaryStaff { get; set; }
-        /// <summary>
-        /// 应发工资
-        /// </summary>
-        [ExcelColumnName("应发工资")]
-        public decimal Payable { get; set; }
-        /// <summary>
-        /// 房租
-        /// </summary>
-        [ExcelColumnName("房租")]
-        public decimal Rent { get; set; }
+        ///// <summary>
+        ///// 应发工资
+        ///// </summary>
+        //[ExcelColumnName("应发工资")]
+        //public decimal Payable { get; set; }
+        ///// <summary>
+        ///// 房租
+        ///// </summary>
+        //[ExcelColumnName("房租")]
+        //public decimal Rent { get; set; }
         /// <summary>
         /// 合计扣税
         /// </summary>
@@ -138,21 +138,21 @@ namespace JournalVoucherAudit.Domain
         /// </summary>
         [ExcelColumnName("扣职业年金")]
         public decimal OccupationalPension { get; set; }
-        /// <summary>
-        /// 扣其它
-        /// </summary>
-        [ExcelColumnName("扣其它")]
-        public decimal Others { get; set; }
+        ///// <summary>
+        ///// 扣其它
+        ///// </summary>
+        //[ExcelColumnName("扣其它")]
+        //public decimal Others { get; set; }
         /// <summary>
         /// 水费
         /// </summary>
         [ExcelColumnName("水费")] 
         public decimal Water { get; set; }
-        /// <summary>
-        /// 实发工资
-        /// </summary>
-        [ExcelColumnName("实发工资")] 
-        public decimal Actual { get; set; }
+        ///// <summary>
+        ///// 实发工资
+        ///// </summary>
+        //[ExcelColumnName("实发工资")] 
+        //public decimal Actual { get; set; }
         /// <summary>
         /// 上月其它绩效
         /// </summary>
@@ -168,16 +168,16 @@ namespace JournalVoucherAudit.Domain
 
         #region 账号
 
-        /// <summary>
-        /// 账号
-        /// </summary>
-        [ExcelColumnName("帐号")]
-        public string BankAccount { get; set; }
-        /// <summary>
-        /// 身份证号
-        /// </summary>
-        [ExcelColumnName("身份证号")]
-        public string IdentityNumber { get; set; }
+        ///// <summary>
+        ///// 账号
+        ///// </summary>
+        //[ExcelColumnName("帐号")]
+        //public string BankAccount { get; set; }
+        ///// <summary>
+        ///// 身份证号
+        ///// </summary>
+        //[ExcelColumnName("身份证号")]
+        //public string IdentityNumber { get; set; }
         /// <summary>
         /// 公积金帐号
         /// </summary>
@@ -185,43 +185,43 @@ namespace JournalVoucherAudit.Domain
         public string FundAccount { get; set; }
         #endregion
 
-        #region 标志
+        //#region 标志
 
-        /// <summary>
-        /// 月度，上月或本月
-        /// </summary>
-        public MonthStatus MonthStatus { get; set; }
+        ///// <summary>
+        ///// 月度，上月或本月
+        ///// </summary>
+        //public MonthStatus MonthStatus { get; set; }
 
-        /// <summary>
-        /// 工资变动理由，新增、调整、退休或离职、死亡等
-        /// </summary>
-        public ChangedStatus ChangedStatus { get; set; }
+        ///// <summary>
+        ///// 工资变动理由，新增、调整、退休或离职、死亡等
+        ///// </summary>
+        //public ChangedStatus ChangedStatus { get; set; }
 
-        #endregion
+        //#endregion
 
-        #region 实现IEquatable
+        //#region 实现IEquatable
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Salary);
-        }
-        /// <summary>
-        /// 使用用户ID进行相等比较
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool Equals(Salary other)
-        {
-            return other != null &&
-                   UserId == other.UserId;
-        }
-        public override int GetHashCode()
-        {
-            int hashCode = 356858736;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId);
-            return hashCode;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return Equals(obj as Salary);
+        //}
+        ///// <summary>
+        ///// 使用用户ID进行相等比较
+        ///// </summary>
+        ///// <param name="other"></param>
+        ///// <returns></returns>
+        //public bool Equals(Salary other)
+        //{
+        //    return other != null &&
+        //           UserId == other.UserId;
+        //}
+        //public override int GetHashCode()
+        //{
+        //    int hashCode = 356858736;
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId);
+        //    return hashCode;
+        //}
 
-        #endregion
+        //#endregion
     }
 }

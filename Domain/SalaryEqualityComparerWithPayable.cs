@@ -9,9 +9,9 @@ namespace JournalVoucherAudit.Domain
     /// <summary>
     /// 依据用户ID和应发，相等比较
     /// </summary>
-    public class SalaryEqualityComparerWithPayable : IEqualityComparer<Salary>
+    public class SalaryEqualityComparerWithPayable : IEqualityComparer<User>
     {
-        bool IEqualityComparer<Salary>.Equals(Salary x, Salary y)
+        bool IEqualityComparer<User>.Equals(User x, User y)
         {
             //人员代码相等
             var keyIsEqual = string.Compare(x.UserId, y.UserId);
@@ -20,7 +20,7 @@ namespace JournalVoucherAudit.Domain
             return (keyIsEqual == 0) && (countIsEqual == 0);
         }
 
-        int IEqualityComparer<Salary>.GetHashCode(Salary obj)
+        int IEqualityComparer<User>.GetHashCode(User obj)
         {
             return obj.UserId.GetHashCode();
         }
@@ -29,9 +29,9 @@ namespace JournalVoucherAudit.Domain
     /// <summary>
     /// 依据用户ID和实发，相等比较
     /// </summary>
-    public class SalaryEqualityComparerWithActual : IEqualityComparer<Salary>
+    public class SalaryEqualityComparerWithActual : IEqualityComparer<User>
     {
-        bool IEqualityComparer<Salary>.Equals(Salary x, Salary y)
+        bool IEqualityComparer<User>.Equals(User x, User y)
         {
             //人员代码相等
             var keyIsEqual = string.Compare(x.UserId, y.UserId);
@@ -40,7 +40,7 @@ namespace JournalVoucherAudit.Domain
             return (keyIsEqual == 0) && (countIsEqual == 0);
         }
 
-        int IEqualityComparer<Salary>.GetHashCode(Salary obj)
+        int IEqualityComparer<User>.GetHashCode(User obj)
         {
             return obj.UserId.GetHashCode();
         }

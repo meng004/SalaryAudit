@@ -150,6 +150,7 @@ namespace JournalVoucherAudit.WinformsUI
         public FrmSalary()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             dgv_CaiWu.RowPostPaint += dgv_CaiWu_RowPostPaint;
             Text = FormTitle;
             lbl_Caution.Text = caution;

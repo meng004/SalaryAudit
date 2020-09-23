@@ -150,6 +150,8 @@ namespace JournalVoucherAudit.WinformsUI
         public FrmRetirement()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
+
             dgv_CaiWu.RowPostPaint += dgv_CaiWu_RowPostPaint;
             Text = FormTitle;
             lbl_Caution.Text = caution;

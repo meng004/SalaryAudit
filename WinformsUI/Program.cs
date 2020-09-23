@@ -13,7 +13,7 @@ namespace JournalVoucherAudit.WinformsUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmRetirement());
+            Application.Run(new FrmStart());
         }
     }
 }

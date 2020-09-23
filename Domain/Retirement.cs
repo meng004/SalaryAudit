@@ -80,9 +80,5 @@ namespace JournalVoucherAudit.Domain
         public decimal Utilities { get; set; }
 
         #endregion
-
-
-
-
     }
 }

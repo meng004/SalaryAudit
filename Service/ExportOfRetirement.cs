@@ -54,15 +54,15 @@ namespace JournalVoucherAudit.Service
                         new ParameterRenderer<Retirement>("AdjustedPension", t => t.AdjustedPension),
                         //职业年金
                         new ParameterRenderer<Retirement>("OccupationalPension", t => t.OccupationalPension),
-                        //应发
+                        //应发工资
                         new ParameterRenderer<Retirement>("Payable", t => t.Payable),
                         //房租
                         new ParameterRenderer<Retirement>("Rent", t => t.Rent),                       
-                        //其它
+                        //扣其它
                         new ParameterRenderer<Retirement>("Others", t => t.Others),
                         //水电
                         new ParameterRenderer<Retirement>("Utilities", t => t.Utilities),
-                        //实发
+                        //实发工资
                         new ParameterRenderer<Retirement>("Actual", t => t.Actual)
                         ));
     }

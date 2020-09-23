@@ -10,10 +10,8 @@ namespace JournalVoucherAudit.Service
         {
         }
 
-        protected override void SetTemplate()
-        {
-            _template= @"Template\Template_salary.xlsx";
-        }
+        protected override string Template => @"Template\Template_salary.xlsx";
+
         protected override SheetRenderer Details => new SheetRenderer("明细表",
                     new ParameterRenderer("CurrentDate", CurrentDate),//格式为2019年12月31日
                     new RepeaterRenderer<Salary>("Reconciliation", Audit.MashupDetailed,

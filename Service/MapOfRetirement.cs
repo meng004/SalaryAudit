@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ExcelMapper;
+﻿using ExcelMapper;
 using JournalVoucherAudit.Domain;
 
 namespace JournalVoucherAudit.Service
 {
-    public class SalaryMap : ExcelClassMap<Salary>
+    public class MapOfRetirement : ExcelClassMap<Retirement>
     {
-        public SalaryMap()
+        public MapOfRetirement()
         {
             // 人才绩效 职称绩效  女职工卫生费 住房补贴    百分之十 护教  特贴 国防津贴    
             // 临聘专业技术人员工资 临聘专业技术人员绩效
@@ -20,92 +15,75 @@ namespace JournalVoucherAudit.Service
             Map(salary => salary.UserId);
             Map(salary => salary.UserName);
             //数值类型
-            Map(salary => salary.Position)
+            Map(salary => salary.Basic)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.Scale)
+            Map(salary => salary.ProvincialSubsidy)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.Performance)
+            Map(salary => salary.Reservation)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.MonthlyReward)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.Payable)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.Actual)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.Talent)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);            
-            Map(salary => salary.Title)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.HealthOfFemale)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.HousingSubsidy)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.TenPercent)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.ProtectingEducation)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
-            Map(salary => salary.SpecialSubsidy)
+            Map(salary => salary.LivingSubsidy)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
             Map(salary => salary.DefenseSubsidy)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.WageOfTemporaryStaff)
+            Map(salary => salary.ProtectingEducation)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.PerformanceOfTemporaryStaff)
+            Map(salary => salary.NuclearSubsidy)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.Rent)
+            Map(salary => salary.OnlyChild)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.TotalTax)
+            Map(salary => salary.MiddleMan)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.Fund)
+            Map(salary => salary.Allowance)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.MedicalInsurance)
+            Map(salary => salary.Nursing)
+                .WithEmptyFallback(0.0m)
+                .WithInvalidFallback(0.0m);
+            Map(salary => salary.SpecialSubsidy)
+                .WithEmptyFallback(0.0m)
+                .WithInvalidFallback(0.0m);
+            Map(salary => salary.AdjustedPension)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
             Map(salary => salary.OccupationalPension)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
+            Map(salary => salary.Payable)
+                .WithEmptyFallback(0.0m)
+                .WithInvalidFallback(0.0m);
+            Map(salary => salary.Rent)
+                .WithEmptyFallback(0.0m)
+                .WithInvalidFallback(0.0m);
             Map(salary => salary.Others)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.Water)
+            Map(salary => salary.Utilities)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.PerformanceOfLastMonth)
+            Map(salary => salary.Actual)
                 .WithEmptyFallback(0.0m)
                 .WithInvalidFallback(0.0m);
-            Map(salary => salary.WithholdingTax)
-                .WithEmptyFallback(0.0m)
-                .WithInvalidFallback(0.0m);
+
             //可选项
             //字符串类型
             Map(salary => salary.IdentityNumber)
                 .MakeOptional()
                 .WithEmptyFallback(string.Empty)
                 .WithInvalidFallback(string.Empty);
-            //不映射
-            Map(salary => salary.FundAccount)
+            Map(salary => salary.BankAccount)
                 .MakeOptional()
                 .WithEmptyFallback(string.Empty)
                 .WithInvalidFallback(string.Empty);
+            //不映射
             Map(salary => salary.MonthStatus)
                 .MakeOptional()
                 .WithEmptyFallback(MonthStatus.Unknown)
@@ -114,11 +92,6 @@ namespace JournalVoucherAudit.Service
                 .MakeOptional()
                 .WithEmptyFallback(ChangedStatus.Unknown)
                 .WithInvalidFallback(ChangedStatus.Unknown);
-            //字符串类型
-            Map(salary => salary.BankAccount)
-                .MakeOptional()
-                .WithEmptyFallback(string.Empty)
-                .WithInvalidFallback(string.Empty);
         }
     }
 }

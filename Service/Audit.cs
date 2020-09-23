@@ -48,9 +48,15 @@ namespace JournalVoucherAudit.Service
                 //按用户ID和实发比较
                 //var salaries = _current_month_salaries.Intersect(_last_month_salaries, new SalaryEqualityComparerWithActual()).ToList();
                 //修改工资变动状态
-                salaries.ForEach(t => t.ChangedStatus = ChangedStatus.UnChanged);
+                var result = new List<U>();
+                foreach (var item in salaries)
+                {
+                    item.ChangedStatus = ChangedStatus.UnChanged;
+                    result.Add(item as U);                    
+                }
+                //salaries.ForEach(t => t.ChangedStatus = ChangedStatus.UnChanged);                
 
-                return salaries as IList<U>;
+                return result;
             }
         }
 

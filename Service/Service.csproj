@@ -95,8 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Audit.cs" />
     <Compile Include="SalaryExtension.cs" />
-    <Compile Include="SalaryImport.cs" />
-    <Compile Include="SalaryMap.cs" />
+    <Compile Include="Import.cs" />
+    <Compile Include="MapOfRetirement.cs" />
+    <Compile Include="MapOfSalary.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\ModelingProject1\LayerDiagram1.layerdiagram">

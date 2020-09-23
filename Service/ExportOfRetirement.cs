@@ -10,17 +10,15 @@ namespace JournalVoucherAudit.Service
         {
         }
 
-        protected override void SetTemplate()
-        {
-            _template= @"Template\Template_retirement.xlsx";
-        }
+        protected override string Template => @"Template\Template_retirement.xlsx";
+
         protected override SheetRenderer Details => new SheetRenderer("明细表",
                     new ParameterRenderer("CurrentDate", CurrentDate),//格式为2019年12月31日
                     new RepeaterRenderer<Retirement>("Reconciliation", Audit.MashupDetailed,
                         // 标志   
                         new ParameterRenderer<Retirement>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
                         new ParameterRenderer<Retirement>("MonthStatus", t => t.MonthStatus.GetDescription()),//== MonthStatus.Current ? "本月" : (t.MonthStatus == MonthStatus.Last ? "上月" : "未知")),
-                                                                                                          //人员基本信息
+                                                                                                              //人员基本信息
                         new ParameterRenderer<Retirement>("DepartmentName", t => t.DepartmentName),
                         new ParameterRenderer<Retirement>("UserId", t => t.UserId),
                         new ParameterRenderer<Retirement>("UserName", t => t.UserName),
@@ -56,7 +54,7 @@ namespace JournalVoucherAudit.Service
                         //应发工资
                         new ParameterRenderer<Retirement>("Payable", t => t.Payable),
                         //房租
-                        new ParameterRenderer<Retirement>("Rent", t => t.Rent),                       
+                        new ParameterRenderer<Retirement>("Rent", t => t.Rent),
                         //扣其它
                         new ParameterRenderer<Retirement>("Others", t => t.Others),
                         //水电

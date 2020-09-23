@@ -16,12 +16,11 @@ namespace JournalVoucherAudit.Service
     {
         #region 属性
 
-        protected string _template = @"Template\Template_salary.xlsx";
         /// <summary>
         /// 设置excel模板
-        /// @"Template\Template_2.xlsx";
+        /// 格式，@"Template\Template_2.xlsx";
         /// </summary>
-        protected abstract void SetTemplate();
+        protected abstract string Template { get; }
 
         /// <summary>
         /// 模板文件
@@ -33,7 +32,7 @@ namespace JournalVoucherAudit.Service
                 // 获取当前运行目录
                 var path = System.AppDomain.CurrentDomain.BaseDirectory;
                 //excel模板
-                var templateFile = path + _template;
+                var templateFile = path + Template;
                 return templateFile;
             }
         }

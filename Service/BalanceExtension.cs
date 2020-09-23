@@ -12,7 +12,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalancePayableOfLast(this IList<Balance> balances)
+        public static decimal BalancePayableOfLast<T, U>(this IList<T> balances)
+            where T : Balance<U>
+            where U : User, new()
         {
             return balances.Sum(t => t.PayableOfLast);
         }
@@ -21,7 +23,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalancePayableOfCurrent(this IList<Balance> balances)
+        public static decimal BalancePayableOfCurrent<T, U>(this IList<T> balances)
+            where T : Balance<U>
+            where U : User, new()
         {
             return balances.Sum(t => t.PayableOfCurrent);
         }
@@ -30,7 +34,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalanceActualOfLast(this IList<Balance> balances)
+        public static decimal BalanceActualOfLast<T, U>(this IList<T> balances)
+            where T : Balance<U>
+            where U : User, new()
         {
             return balances.Sum(t => t.ActualOfLast);
         }
@@ -39,7 +45,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalanceActualOfCurrent(this IList<Balance> balances)
+        public static decimal BalanceActualOfCurrent<T, U>(this IList<T> balances)
+            where T : Balance<U>
+            where U : User, new()
         {
             return balances.Sum(t => t.ActualOfCurrent);
         }

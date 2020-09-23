@@ -86,10 +86,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditOfRetirement.cs" />
+    <Compile Include="AuditOfSalary.cs" />
     <Compile Include="BalanceExtension.cs" />
     <Compile Include="Export.cs" />
+    <Compile Include="ExportOfRetirement.cs" />
+    <Compile Include="ExportOfSalary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalaryAudit.cs" />
+    <Compile Include="Audit.cs" />
     <Compile Include="SalaryExtension.cs" />
     <Compile Include="SalaryImport.cs" />
     <Compile Include="SalaryMap.cs" />

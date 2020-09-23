@@ -74,6 +74,7 @@
     <StartupObject>JournalVoucherAudit.WinformsUI.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelMapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -88,16 +89,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmRetirement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmRetirement.Designer.cs">
+      <DependentUpon>FrmRetirement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSalary.Designer.cs">
+      <DependentUpon>FrmSalary.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmRetirement.resx">
+      <DependentUpon>FrmRetirement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSalary.resx">
+      <DependentUpon>FrmSalary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

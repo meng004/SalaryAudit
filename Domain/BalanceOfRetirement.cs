@@ -13,7 +13,6 @@ namespace JournalVoucherAudit.Domain
     {
         public BalanceOfRetirement(Retirement last, Retirement current) : base(last, current)
         {
-
         }
         public override Retirement Detail
         {

@@ -14,7 +14,6 @@ namespace JournalVoucherAudit.Domain
 
         public BalanceOfSalary(Salary last, Salary current) : base(last, current)
         {
-
         }
 
         /// <summary>

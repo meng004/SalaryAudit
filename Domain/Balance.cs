@@ -10,7 +10,7 @@ namespace JournalVoucherAudit.Domain
     /// 工资差额
     /// 抽象类
     /// </summary>
-    public abstract class Balance<T> where T: User,new() 
+    public abstract class Balance<T> where T: User 
     {
         #region 字段
 
@@ -22,16 +22,22 @@ namespace JournalVoucherAudit.Domain
         /// 本月工资
         /// </summary>
         protected T _current;
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="last">上月工资</param>
-        /// <param name="current">本月工资</param>
-        public Balance(T last, T current)
+
+        protected Balance(T last, T current)
         {
             _last = last;
             _current = current;
         }
+        ///// <summary>
+        ///// 构造函数
+        ///// </summary>
+        ///// <param name="last">上月工资</param>
+        ///// <param name="current">本月工资</param>
+        //public Balance(T last, T current)
+        //{
+        //    _last = last;
+        //    _current = current;
+        //}
 
         #endregion
 

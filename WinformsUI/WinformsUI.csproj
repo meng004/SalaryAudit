@@ -133,7 +133,7 @@
     <Content Include="Template\Template_new.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Template\template_2.xlsx">
+    <None Include="Template\template_salary.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

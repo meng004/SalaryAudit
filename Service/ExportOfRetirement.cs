@@ -8,7 +8,6 @@ namespace JournalVoucherAudit.Service
     {
         public ExportOfRetirement(string filename, AuditOfRetirement audit) : base(filename, audit)
         {
-
         }
 
         protected override void SetTemplate()

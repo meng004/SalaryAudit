@@ -1,6 +1,6 @@
 ﻿namespace JournalVoucherAudit.WinformsUI
 {
-    partial class Form1
+    partial class FrmSalary
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSalary));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_Caution = new System.Windows.Forms.Label();
             this.btn_GuoKuFilePath = new System.Windows.Forms.Button();
@@ -48,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgv_CaiWu = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.ChangedStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +56,7 @@
             this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Performance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonthlyReward = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CaiWu)).BeginInit();
@@ -288,29 +288,21 @@
             this.dgv_CaiWu.Margin = new System.Windows.Forms.Padding(8);
             this.dgv_CaiWu.Name = "dgv_CaiWu";
             this.dgv_CaiWu.ReadOnly = true;
-            this.dgv_CaiWu.RowHeadersWidth = 120;
+            this.dgv_CaiWu.RowHeadersWidth = 50;
             this.dgv_CaiWu.RowTemplate.Height = 23;
             this.dgv_CaiWu.Size = new System.Drawing.Size(2563, 787);
             this.dgv_CaiWu.TabIndex = 0;
             this.dgv_CaiWu.TabStop = false;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.dgv_CaiWu);
-            this.panel2.Location = new System.Drawing.Point(32, 312);
-            this.panel2.Margin = new System.Windows.Forms.Padding(5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2563, 787);
-            this.panel2.TabIndex = 7;
-            // 
             // ChangedStatus
             // 
+            this.ChangedStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ChangedStatus.DataPropertyName = "ChangedStatus";
             this.ChangedStatus.HeaderText = "状态";
             this.ChangedStatus.MinimumWidth = 12;
             this.ChangedStatus.Name = "ChangedStatus";
             this.ChangedStatus.ReadOnly = true;
-            this.ChangedStatus.Width = 50;
+            this.ChangedStatus.Width = 127;
             // 
             // DepartmentName
             // 
@@ -323,59 +315,73 @@
             // 
             // UserId
             // 
+            this.UserId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.UserId.DataPropertyName = "UserId";
             this.UserId.HeaderText = "人员代码";
             this.UserId.MinimumWidth = 12;
             this.UserId.Name = "UserId";
             this.UserId.ReadOnly = true;
-            this.UserId.Width = 150;
+            this.UserId.Width = 187;
             // 
             // UserName
             // 
+            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.UserName.DataPropertyName = "UserName";
             this.UserName.HeaderText = "姓名";
             this.UserName.MinimumWidth = 12;
             this.UserName.Name = "UserName";
             this.UserName.ReadOnly = true;
-            this.UserName.Width = 150;
+            this.UserName.Width = 127;
             // 
             // Position
             // 
+            this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Position.DataPropertyName = "PayableOfLast";
             this.Position.HeaderText = "上月应发";
             this.Position.MinimumWidth = 20;
             this.Position.Name = "Position";
             this.Position.ReadOnly = true;
-            this.Position.Width = 150;
+            this.Position.Width = 187;
             // 
             // Scale
             // 
+            this.Scale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Scale.DataPropertyName = "PayableOfCurrent";
             this.Scale.HeaderText = "本月应发";
             this.Scale.MinimumWidth = 12;
             this.Scale.Name = "Scale";
             this.Scale.ReadOnly = true;
-            this.Scale.Width = 150;
+            this.Scale.Width = 187;
             // 
             // Performance
             // 
+            this.Performance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Performance.DataPropertyName = "ActualOfLast";
             this.Performance.HeaderText = "上月实发";
             this.Performance.MinimumWidth = 12;
             this.Performance.Name = "Performance";
             this.Performance.ReadOnly = true;
-            this.Performance.Width = 150;
+            this.Performance.Width = 187;
             // 
             // MonthlyReward
             // 
+            this.MonthlyReward.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.MonthlyReward.DataPropertyName = "ActualOfCurrent";
             this.MonthlyReward.HeaderText = "本月实发";
             this.MonthlyReward.MinimumWidth = 12;
             this.MonthlyReward.Name = "MonthlyReward";
             this.MonthlyReward.ReadOnly = true;
-            this.MonthlyReward.Width = 250;
             // 
-            // Form1
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgv_CaiWu);
+            this.panel2.Location = new System.Drawing.Point(32, 312);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(2563, 787);
+            this.panel2.TabIndex = 7;
+            // 
+            // FrmSalary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -385,9 +391,7 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(8);
-            this.MaximumSize = new System.Drawing.Size(2664, 1204);
-            this.MinimumSize = new System.Drawing.Size(2377, 1204);
-            this.Name = "Form1";
+            this.Name = "FrmSalary";
             this.Text = "人事-财务工资核对系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);

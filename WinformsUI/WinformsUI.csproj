@@ -74,6 +74,7 @@
     <StartupObject>JournalVoucherAudit.WinformsUI.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelMapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -88,16 +89,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmRetirement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmRetirement.Designer.cs">
+      <DependentUpon>FrmRetirement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSalary.Designer.cs">
+      <DependentUpon>FrmSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStart.Designer.cs">
+      <DependentUpon>FrmStart.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmRetirement.resx">
+      <DependentUpon>FrmRetirement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSalary.resx">
+      <DependentUpon>FrmSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmStart.resx">
+      <DependentUpon>FrmStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,10 +128,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <AdditionalFiles Include="..\ModelingProject1\LayerDiagram1.layerdiagram">
-      <Link>LayerDiagram1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\JournalVoucherAudit.Domain.CaiZhengBuZhuShouRu.datasource" />
@@ -127,14 +142,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="icon.ico" />
-    <Content Include="Template\Template.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Template\Template_new.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Template\template_2.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Template\template_retirement.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Template\template_salary.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

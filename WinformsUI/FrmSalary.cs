@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace JournalVoucherAudit.WinformsUI
 {
-    public partial class Form1 : Form
+    public partial class FrmSalary : Form
     {
         #region 字段
 
@@ -20,8 +20,8 @@ namespace JournalVoucherAudit.WinformsUI
         /// <summary>
         /// 报表类型，与配置文件中的key相同
         /// </summary>
-        private const string _Last = "Last";
-        private const string _Current = "Current";
+        private const string _Last = "LastOfSalary";
+        private const string _Current = "CurrentOfSalary";
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace JournalVoucherAudit.WinformsUI
             return path;
         }
 
-        
+
         #endregion
 
         #region 属性
@@ -80,7 +80,7 @@ namespace JournalVoucherAudit.WinformsUI
 
                 //读取标题行的行号
                 var index = GetTitleIndex(_Last);
-                var excelImportCaiWu = new SalaryImport(txt_CaiWuFilePath.Text, index[0], index[1]);
+                var excelImportCaiWu = new ImportOfSalary(txt_CaiWuFilePath.Text, index[0], index[1]);
                 var items = excelImportCaiWu.Salaries;
 
                 //取文件标题
@@ -105,7 +105,7 @@ namespace JournalVoucherAudit.WinformsUI
                 //读取标题行的行号
                 var index = GetTitleIndex(_Current);
                 //创建导入对象
-                var excelImportGuoKu = new SalaryImport(txt_GuoKuFilePath.Text, index[0], index[1]);
+                var excelImportGuoKu = new ImportOfSalary(txt_GuoKuFilePath.Text, index[0], index[1]);
                 //创建国库数据项
                 //var natureOfFunds = GetNatureOfFunds;
                 var items = excelImportGuoKu.Salaries;
@@ -116,7 +116,7 @@ namespace JournalVoucherAudit.WinformsUI
         /// 本月应发工资变动记录
         /// 前面为新增工资账户，后面为现有账户上月与本月工资
         /// </summary>
-        private SalaryAudit Audit => new SalaryAudit(LastSalaries, CurrentSalaries);
+        private AuditOfSalary Audit => new AuditOfSalary(LastSalaries, CurrentSalaries);
         /// <summary>
         /// 读取程序集信息，构造窗体的标题
         /// </summary>
@@ -147,9 +147,10 @@ namespace JournalVoucherAudit.WinformsUI
 
         #region 初始化
 
-        public Form1()
+        public FrmSalary()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             dgv_CaiWu.RowPostPaint += dgv_CaiWu_RowPostPaint;
             Text = FormTitle;
             lbl_Caution.Text = caution;
@@ -267,7 +268,7 @@ namespace JournalVoucherAudit.WinformsUI
             lbl_Message.Text = msg;
 
             //转换为可排序列表
-            var caiWuSort = new SortableBindingList<Balance>(Audit.Mashup);
+            var caiWuSort = new SortableBindingList<BalanceOfSalary>(Audit.Mashup);
 
             //绑定数据            
             dgv_CaiWu.DataSource = caiWuSort;//caiWuSort.OrderBy(t => t.CreditAmount).ToList();
@@ -284,7 +285,7 @@ namespace JournalVoucherAudit.WinformsUI
             lbl_Caution.Text = string.Empty;
 
             //取出不符合要求的数据
-            var changed_Salaries = dgv_CaiWu.DataSource as IEnumerable<Balance>;
+            var changed_Salaries = dgv_CaiWu.DataSource as IEnumerable<BalanceOfSalary>;
 
             //检查数据源
             if (changed_Salaries == null)
@@ -294,15 +295,15 @@ namespace JournalVoucherAudit.WinformsUI
             }
             //文件名
             var voucherDate = DateTime.Today;
-            var filename = $"{voucherDate.Year}年{voucherDate.Month}月-工资对账单";
+            var filename = $"{voucherDate.Year}年{voucherDate.Month}月-在职工资对账单";
             //保存文件对话
             SaveFileDialog saveFileDlg = new SaveFileDialog { Filter = Resources.FileFilter_xlsx_first, FileName = filename };
 
             if (DialogResult.OK.Equals(saveFileDlg.ShowDialog()))
             {
                 //导出excel
-                var export = new Export(saveFileDlg.FileName, Audit);
-                export.Save();
+                var export = new ExportOfSalary(saveFileDlg.FileName, Audit);
+                //export.Save();
                 //提示消息
                 lbl_Message.Text = Resources.ResultMessage;
             }

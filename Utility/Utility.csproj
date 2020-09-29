@@ -74,10 +74,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\ModelingProject1\LayerDiagram1.layerdiagram">
-      <Link>LayerDiagram1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

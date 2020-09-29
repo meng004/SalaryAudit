@@ -1,32 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="JournalVoucherAudit.Domain.CaiWuItem">
-    <Position X="4.75" Y="0.5" Width="1.75" />
+  <Comment CommentText="映射类，用于excel映射到模型，salary与retirement">
+    <Position X="1.608" Y="4.488" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="枚举，工资记录更改状态，月度状态">
+    <Position X="6.971" Y="4.517" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="差额类，用于计算工资科目上月与本月的差额。&#xD;&#xA;主要功能封装在抽象类Balance，子类包括在职与退休">
+    <Position X="1.596" Y="0.888" Height="0.75" Width="2.296" />
+  </Comment>
+  <Comment CommentText="相等比较器，按实发工资比较，按应发工资比较">
+    <Position X="7.221" Y="2.804" Height="0.533" Width="1.7" />
+  </Comment>
+  <Comment CommentText="工资类，用于将工资报表映射到内存。User为抽象基类，封装了公共属性。&#xD;&#xA;在职与离退休">
+    <Position X="9.033" Y="0.5" Height="0.938" Width="1.7" />
+  </Comment>
+  <Class Name="JournalVoucherAudit.Domain.Balance&lt;T&gt;" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAQAAAAAAAAAAAAAAKAAAQA=</HashCode>
-      <FileName>CaiWuItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAgAAACAAAgAAAIAAAIAQQACBAIACIA=</HashCode>
+      <FileName>Balance.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Domain.GuoKuItem">
-    <Position X="7" Y="0.5" Width="1.75" />
+  <Class Name="JournalVoucherAudit.Domain.BalanceOfRetirement" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAABAAAASAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>GuoKuItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>BalanceOfRetirement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Domain.TiaoJieItem">
-    <Position X="7.25" Y="3.25" Width="1.75" />
+  <Class Name="JournalVoucherAudit.Domain.BalanceOfSalary" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIgAAAABAAAACAAAAAAAAAAAABAKAAAQA=</HashCode>
-      <FileName>TiaoJieItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>BalanceOfSalary.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Domain.TiaoJieTable">
-    <Position X="5" Y="3.25" Width="1.5" />
+  <Class Name="JournalVoucherAudit.Domain.MapOfRetirement" Collapsed="true">
+    <Position X="0.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAABAAAAABAAAACAA=</HashCode>
-      <FileName>TiaoJieTable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MapOfRetirement.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="JournalVoucherAudit.Domain.MapOfSalary" Collapsed="true">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MapOfSalary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Domain.Retirement" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEBAACAUEEACAAAAAAAAAAAAAAABAECEAAA=</HashCode>
+      <FileName>Retirement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Domain.Salary" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAABAEAkAAAFAkABIAgAAAACAgABAAAQIAAoAAIAQ=</HashCode>
+      <FileName>Salary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Domain.User" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAAACAAAAAAAAgAgAAAAQgAAKAAAIAAARAAAAAAgIA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JournalVoucherAudit.Domain.SalaryEqualityComparerWithPayable" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>SalaryEqualityComparerWithPayable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JournalVoucherAudit.Domain.SalaryEqualityComparerWithActual" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>SalaryEqualityComparerWithPayable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="JournalVoucherAudit.Domain.ChangedStatus" Collapsed="true">
+    <Position X="6.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABDAAAAAAAAAAACAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ChangedStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="JournalVoucherAudit.Domain.MonthStatus" Collapsed="true">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAACAAAAABA=</HashCode>
+      <FileName>MonthStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="微软雅黑" Size="9" />
 </ClassDiagram>

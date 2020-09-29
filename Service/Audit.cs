@@ -5,40 +5,38 @@ using System.Linq;
 
 namespace JournalVoucherAudit.Service
 {
-    public class SalaryAudit
+    public abstract class Audit<U, B>
+        where U : User, new()
+        where B : Balance<U>
     {
         /// <summary>
         /// 上月工资
         /// </summary>
-        private IList<Salary> _last_month_salaries;
+        protected IList<U> _last_month_salaries;
         /// <summary>
         /// 本月工资
         /// </summary>
-        private IList<Salary> _current_month_salaries;
-        /// <summary>
-        /// 工资审计
-        /// </summary>
-        /// <param name="last_month_salaries">上月工资</param>
-        /// <param name="current_month_salaries">本月工资</param>
-        public SalaryAudit(IList<Salary> last_month_salaries, IList<Salary> current_month_salaries)
+        protected IList<U> _current_month_salaries;
+
+        protected Audit(IList<U> last, IList<U> current)
         {
-            _last_month_salaries = last_month_salaries;
-            _current_month_salaries = current_month_salaries;
+            _last_month_salaries = last;
+            _current_month_salaries = current;
         }
         /// <summary>
         /// 上月工资
         /// </summary>
-        public IList<Salary> Last { get { return _last_month_salaries; } }
+        public IList<U> Last { get { return _last_month_salaries; } }
         /// <summary>
         /// 本月工资
         /// </summary>
-        public IList<Salary> Current { get { return _current_month_salaries; } }
+        public IList<U> Current { get { return _current_month_salaries; } }
 
         /// <summary>
         /// 取本月工资与上月相同的记录
         /// 比较规则封装在比较器类，两种，分别为应发金额、实发金额
         /// </summary>
-        public IList<Salary> EqualsWithLastMonth
+        public IList<U> EqualsWithLastMonth
         {
             get
             {
@@ -50,9 +48,15 @@ namespace JournalVoucherAudit.Service
                 //按用户ID和实发比较
                 //var salaries = _current_month_salaries.Intersect(_last_month_salaries, new SalaryEqualityComparerWithActual()).ToList();
                 //修改工资变动状态
-                salaries.ForEach(t => t.ChangedStatus = ChangedStatus.UnChanged);
+                var result = new List<U>();
+                foreach (var item in salaries)
+                {
+                    item.ChangedStatus = ChangedStatus.UnChanged;
+                    result.Add(item as U);
+                }
+                //salaries.ForEach(t => t.ChangedStatus = ChangedStatus.UnChanged);                
 
-                return salaries;
+                return result;
             }
         }
 
@@ -62,7 +66,7 @@ namespace JournalVoucherAudit.Service
         /// userid上月有，本月无；本月有，上月无；两月都有
         /// Item1为上月记录，Item2为本月记录
         /// </summary>
-        public Tuple<IList<Salary>, IList<Salary>> NotEquals
+        public Tuple<IList<U>, IList<U>> NotEquals
         {
             get
             {
@@ -81,7 +85,7 @@ namespace JournalVoucherAudit.Service
                 last_salaries.ForEach(t => t.MonthStatus = MonthStatus.Last);
                 current_salaries.ForEach(t => t.MonthStatus = MonthStatus.Current);
 
-                var result = new Tuple<IList<Salary>, IList<Salary>>(last_salaries, current_salaries);
+                var result = new Tuple<IList<U>, IList<U>>(last_salaries, current_salaries);
                 return result;
             }
         }
@@ -90,7 +94,7 @@ namespace JournalVoucherAudit.Service
         /// 出现在上月，未出现在本月的工资
         /// 可能的理由，离职、停薪、退休、死亡
         /// </summary>
-        public IList<Salary> Retired
+        public IList<U> Retired
         {
             get
             {
@@ -108,7 +112,7 @@ namespace JournalVoucherAudit.Service
         /// userID两月都有，工资不同的记录
         /// Item1为上月记录，Item2为本月记录
         /// </summary>
-        public Tuple<IList<Salary>, IList<Salary>> ChangedWithSameUserId
+        public Tuple<IList<U>, IList<U>> ChangedWithSameUserId
         {
             get
             {
@@ -121,7 +125,7 @@ namespace JournalVoucherAudit.Service
                 current_salaries.ForEach(t => t.ChangedStatus = ChangedStatus.Regulated);
                 last_salaries.ForEach(t => t.ChangedStatus = ChangedStatus.Regulated);
 
-                var result = new Tuple<IList<Salary>, IList<Salary>>(last_salaries, current_salaries);
+                var result = new Tuple<IList<U>, IList<U>>(last_salaries, current_salaries);
                 return result;
             }
         }
@@ -130,7 +134,7 @@ namespace JournalVoucherAudit.Service
         /// 新入职
         /// 出现在本月，未出现在上月
         /// </summary>
-        public IList<Salary> NewSalaries
+        public IList<U> NewSalaries
         {
             get
             {
@@ -147,28 +151,28 @@ namespace JournalVoucherAudit.Service
         /// <summary>
         /// 差额
         /// </summary>
-        public IList<Balance> Balances
-        {
-            get
-            {
-                //取工资变动记录
-                var not_equals = ChangedWithSameUserId;
-                //构造差额
-                var result = not_equals.Item2.Join(not_equals.Item1,
-                    current => current.UserId,
-                    last => last.UserId,
-                    (current, last) => new Balance(last, current)
-                    );
-                //返回结果
-                return result.ToList();
-            }
-        }
+        public abstract IList<B> Balances { get; }
+        //{
+        //    get
+        //    {
+        //        //取工资变动记录
+        //        var not_equals = ChangedWithSameUserId;
+        //        //构造差额
+        //        var result = not_equals.Item2.Join(not_equals.Item1,
+        //            current => current.UserId,
+        //            last => last.UserId,
+        //            (current, last) => new U(last, current)
+        //            );
+        //        //返回结果
+        //        return result.ToList();
+        //    }
+        //}
         /// <summary>
         /// 差额详情
         /// 本月-上月的变动金额
         /// 正为增加，负为减少
         /// </summary>
-        public IList<Salary> BalancesDetailed
+        public IList<U> BalancesDetailed
         {
             get
             {
@@ -183,7 +187,7 @@ namespace JournalVoucherAudit.Service
         /// 上月工资在上
         /// 本月工资在下
         /// </summary>
-        public IList<Salary> MashupById
+        public IList<U> MashupById
         {
             get
             {
@@ -203,35 +207,35 @@ namespace JournalVoucherAudit.Service
         /// 差额混合
         /// 异动在前，入职、退休在后
         /// </summary>
-        public IList<Balance> Mashup
-        {
-            get
-            {
-                //按应发降序，按部门、用户编号升序
-                var balanced = Balances.OrderByDescending(t => t.PayableOfCurrent)
-                                       .ThenBy(t => t.DepartmentName)
-                                       .ThenBy(t => t.UserId);
-                //取新入职，按部门、用户编号升序
-                var news = NewSalaries.OrderBy(t => t.DepartmentName)
-                                      .ThenBy(t => t.UserId)
-                                      .Select(t => new Balance(new Salary(), t));
-                //取退休，按部门、用户编号升序
-                var retired = Retired.OrderBy(t => t.DepartmentName)
-                                     .ThenBy(t => t.UserId)
-                                     .Select(t => new Balance(t, new Salary()));
+        public abstract IList<B> Mashup { get; }
+        //{
+        //    get
+        //    {
+        //        //按应发降序，按部门、用户编号升序
+        //        var balanced = Balances.OrderByDescending(t => t.PayableOfCurrent)
+        //                               .ThenBy(t => t.DepartmentName)
+        //                               .ThenBy(t => t.UserId);
+        //        //取新入职，按部门、用户编号升序
+        //        var news = NewSalaries.OrderBy(t => t.DepartmentName)
+        //                              .ThenBy(t => t.UserId)
+        //                              .Select(t => new U(new T(), t));
+        //        //取退休，按部门、用户编号升序
+        //        var retired = Retired.OrderBy(t => t.DepartmentName)
+        //                             .ThenBy(t => t.UserId)
+        //                             .Select(t => new U(t, new T()));
 
-                //返回
-                var balancedWithNew = balanced.Concat(news);
-                var withRetired = balancedWithNew.Concat(retired);
-                return withRetired.ToList();
-            }
-        }
+        //        //返回
+        //        var balancedWithNew = balanced.Concat(news);
+        //        var withRetired = balancedWithNew.Concat(retired);
+        //        return withRetired.ToList();
+        //    }
+        //}
         /// <summary>
         /// 差额混合细节
         /// 异动在前，入职、退休在后
         /// 异动包括上月工资和本月工资
         /// </summary>
-        public IList<Salary> MashupDetailed
+        public IList<U> MashupDetailed
         {
             get
             {
@@ -253,14 +257,14 @@ namespace JournalVoucherAudit.Service
         /// <summary>
         /// 应发余额是否平衡
         /// </summary>
-        public bool IsBalanced
+        public bool IsBalanced //{ get; }
         {
             get
             {
                 //上月应发调节后余额，上月应发 - 上月应发差额小计
-                var last = _last_month_salaries.TotalPayable() - Mashup.BalancePayableOfLast();
+                var last = _last_month_salaries.TotalPayable() - Mashup.BalancePayableOfLast<U, B>();
                 //本月应发调节后余额，本月应发 - 本月应发差额小计
-                var current = _current_month_salaries.TotalPayable() - Mashup.BalancePayableOfCurrent();
+                var current = _current_month_salaries.TotalPayable() - Mashup.BalancePayableOfCurrent<U, B>();
 
                 return decimal.Equals(last, current);
             }

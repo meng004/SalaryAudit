@@ -86,19 +86,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit.cs" />
+    <Compile Include="AuditOfRetirement.cs" />
+    <Compile Include="AuditOfSalary.cs" />
     <Compile Include="BalanceExtension.cs" />
     <Compile Include="Export.cs" />
+    <Compile Include="ExportOfRetirement.cs" />
+    <Compile Include="ExportOfSalary.cs" />
+    <Compile Include="Import.cs" />
+    <Compile Include="ImportOfRetirement.cs" />
+    <Compile Include="ImportOfSalary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalaryAudit.cs" />
     <Compile Include="SalaryExtension.cs" />
-    <Compile Include="SalaryImport.cs" />
-    <Compile Include="SalaryMap.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\ModelingProject1\LayerDiagram1.layerdiagram">
-      <Link>LayerDiagram1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />

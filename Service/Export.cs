@@ -15,11 +15,14 @@ namespace JournalVoucherAudit.Service
     /// <summary>
     /// 导出
     /// </summary>
-    public class Export
+    public abstract class Export<U, B>
+        where U: User, new()
+        where B: Balance<U>
+        
     {
         #region 属性
 
-        private string _template = @"Template\Template_2.xlsx";
+        protected abstract string Template { get; }
         /// <summary>
         /// 模板文件
         /// </summary>
@@ -30,21 +33,21 @@ namespace JournalVoucherAudit.Service
                 // 获取当前运行目录
                 var path = System.AppDomain.CurrentDomain.BaseDirectory;
                 //excel模板
-                var templateFile = path + _template;
+                var templateFile = path + Template;
                 return templateFile;
             }
         }
         /// <summary>
         /// 导出报表名称
         /// </summary>
-        private string Filename { get; set; }
+        protected string Filename { get; set; }
         /// <summary>
         /// 审计类
         /// </summary>
-        private SalaryAudit Audit { get; set; }
+        protected Audit<U, B> Audit { get; set; }
         //对账日期
         //月份的最后一天
-        private string CurrentDate => DateTime.Today.LastDayOfMonth().ToLongDateString();
+        protected string CurrentDate => DateTime.Today.LastDayOfMonth().ToLongDateString();
 
         #endregion
 
@@ -53,95 +56,83 @@ namespace JournalVoucherAudit.Service
         /// <summary>
         /// 调节表
         /// </summary>
-        private SheetRenderer Balances => new SheetRenderer("调节表",
+        protected SheetRenderer Balances => new SheetRenderer("调节表",
                 new ParameterRenderer("CurrentDate", CurrentDate),
+                //累计
                 //累计
                 new ParameterRenderer("TotalPayableOfLast", Audit.Last.TotalPayable()),
                 new ParameterRenderer("TotalPayableOfCurrent", Audit.Current.TotalPayable()),
-                new ParameterRenderer("LastBalanced", Audit.Last.TotalPayable() - Audit.Mashup.BalancePayableOfLast()),
-                new ParameterRenderer("CurrentBalanced", Audit.Current.TotalPayable() - Audit.Mashup.BalancePayableOfCurrent()),
+                new ParameterRenderer("LastBalanced", Audit.Last.TotalPayable() - Audit.Mashup.BalancePayableOfLast<U, B>()),
+                new ParameterRenderer("CurrentBalanced", Audit.Current.TotalPayable() - Audit.Mashup.BalancePayableOfCurrent<U, B>()),
                 //差额累计
-                new ParameterRenderer("BalancePayableOfLast", Audit.Mashup.BalancePayableOfLast()),
-                new ParameterRenderer("BalancePayableOfCurrent", Audit.Mashup.BalancePayableOfCurrent()),
-                new ParameterRenderer("BalanceActualOfLast", Audit.Mashup.BalanceActualOfLast()),
-                new ParameterRenderer("BalanceActualOfCurrent", Audit.Mashup.BalanceActualOfCurrent()),
-                new RepeaterRenderer<Balance>("Reconciliation", Audit.Mashup,
-                    new ParameterRenderer<Balance>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
-                    new ParameterRenderer<Balance>("DepartmentName", t => t.DepartmentName),
-                    new ParameterRenderer<Balance>("UserId", t => t.UserId),
-                    new ParameterRenderer<Balance>("UserName", t => t.UserName),
-                    new ParameterRenderer<Balance>("PayableOfLast", t => t.PayableOfLast),
-                    new ParameterRenderer<Balance>("PayableOfCurrent", t => t.PayableOfCurrent),
-                    new ParameterRenderer<Balance>("ActualOfLast", t => t.ActualOfLast),
-                    new ParameterRenderer<Balance>("ActualOfCurrent", t => t.ActualOfCurrent)
+                new ParameterRenderer("BalancePayableOfLast", Audit.Mashup.BalancePayableOfLast<U, B>()),
+                new ParameterRenderer("BalancePayableOfCurrent", Audit.Mashup.BalancePayableOfCurrent<U, B>()),
+                new ParameterRenderer("BalanceActualOfLast", Audit.Mashup.BalanceActualOfLast<U, B>()),
+                new ParameterRenderer("BalanceActualOfCurrent", Audit.Mashup.BalanceActualOfCurrent<U, B>()),
+                new RepeaterRenderer<B>("Reconciliation", Audit.Mashup,
+                    new ParameterRenderer<B>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
+                    new ParameterRenderer<B>("DepartmentName", t => t.DepartmentName),
+                    new ParameterRenderer<B>("UserId", t => t.UserId),
+                    new ParameterRenderer<B>("UserName", t => t.UserName),
+                    new ParameterRenderer<B>("PayableOfLast", t => t.PayableOfLast),
+                    new ParameterRenderer<B>("PayableOfCurrent", t => t.PayableOfCurrent),
+                    new ParameterRenderer<B>("ActualOfLast", t => t.ActualOfLast),
+                    new ParameterRenderer<B>("ActualOfCurrent", t => t.ActualOfCurrent)
                 ));
         /// <summary>
         /// 明细表
         /// </summary>
-        private SheetRenderer Details => new SheetRenderer("明细表",
-                    new ParameterRenderer("CurrentDate", CurrentDate),//格式为2019年12月31日
-                    new RepeaterRenderer<Salary>("Reconciliation", Audit.MashupDetailed,
-                        // 标志   
-                        new ParameterRenderer<Salary>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
-                        new ParameterRenderer<Salary>("MonthStatus", t => t.MonthStatus.GetDescription()),//== MonthStatus.Current ? "本月" : (t.MonthStatus == MonthStatus.Last ? "上月" : "未知")),
-                                                                                                          //人员基本信息
-                        new ParameterRenderer<Salary>("DepartmentName", t => t.DepartmentName),
-                        new ParameterRenderer<Salary>("UserId", t => t.UserId),
-                        new ParameterRenderer<Salary>("UserName", t => t.UserName),
-                        //工资科目
-                        //岗位工资
-                        new ParameterRenderer<Salary>("Position", t => t.Position),
-                        //薪级工资
-                        new ParameterRenderer<Salary>("Scale", t => t.Scale),
-                        //基础绩效工资
-                        new ParameterRenderer<Salary>("Performance", t => t.Performance),
-                        //月度奖励绩效
-                        new ParameterRenderer<Salary>("MonthlyReward", t => t.MonthlyReward),
-                        //人才绩效
-                        new ParameterRenderer<Salary>("Talent", t => t.Talent),
-                        //职称绩效
-                        new ParameterRenderer<Salary>("Title", t => t.Title),
-                        //女职工卫生费
-                        new ParameterRenderer<Salary>("HealthOfFemale", t => t.HealthOfFemale),
-                        //住房补贴
-                        new ParameterRenderer<Salary>("HousingSubsidy", t => t.HousingSubsidy),
-                        //百分之十
-                        new ParameterRenderer<Salary>("TenPercent", t => t.TenPercent),
-                        //护教
-                        new ParameterRenderer<Salary>("ProtectingEducation", t => t.ProtectingEducation),
-                        //特贴
-                        new ParameterRenderer<Salary>("SpecialSubsidy", t => t.SpecialSubsidy),
-                        //国防津贴
-                        new ParameterRenderer<Salary>("DefenseSubsidy", t => t.DefenseSubsidy),
-                        //临聘技术人员工资
-                        new ParameterRenderer<Salary>("WageOfTemporaryStaff", t => t.WageOfTemporaryStaff),
-                        //临聘技术人员绩效
-                        new ParameterRenderer<Salary>("PerformanceOfTemporaryStaff", t => t.PerformanceOfTemporaryStaff),
-                        //应发
-                        new ParameterRenderer<Salary>("Payable", t => t.Payable),
-                        //房租
-                        new ParameterRenderer<Salary>("Rent", t => t.Rent),
-                        //合计扣税
-                        new ParameterRenderer<Salary>("TotalTax", t => t.TotalTax),
-                        //公积金
-                        new ParameterRenderer<Salary>("Fund", t => t.Fund),
-                        //医保
-                        new ParameterRenderer<Salary>("MedicalInsurance", t => t.MedicalInsurance),
-                        //养老
-                        new ParameterRenderer<Salary>("EndowmentInsurance", t => t.EndowmentInsurance),
-                        //职业年金
-                        new ParameterRenderer<Salary>("OccupationalPension", t => t.OccupationalPension),
-                        //其它
-                        new ParameterRenderer<Salary>("Others", t => t.Others),
-                        //水费
-                        new ParameterRenderer<Salary>("Water", t => t.Water),
-                        //实发
-                        new ParameterRenderer<Salary>("Actual", t => t.Actual),
-                        //上月其他绩效
-                        new ParameterRenderer<Salary>("PerformanceOfLastMonth", t => t.PerformanceOfLastMonth),
-                        //上月预扣税
-                        new ParameterRenderer<Salary>("WithholdingTax", t => t.WithholdingTax)
-                        ));
+        protected abstract SheetRenderer Details { get; }
+        //private SheetRenderer Details => new SheetRenderer("明细表",
+        //            new ParameterRenderer("CurrentDate", CurrentDate),//格式为2019年12月31日
+        //            new RepeaterRenderer<Retirement>("Reconciliation", Audit.MashupDetailed,
+        //                // 标志   
+        //                new ParameterRenderer<Retirement>("ChangedStatus", t => t.ChangedStatus.GetDescription()),
+        //                new ParameterRenderer<Retirement>("MonthStatus", t => t.MonthStatus.GetDescription()),//== MonthStatus.Current ? "本月" : (t.MonthStatus == MonthStatus.Last ? "上月" : "未知")),
+        //                                                                                                      //人员基本信息
+        //                new ParameterRenderer<Retirement>("DepartmentName", t => t.DepartmentName),
+        //                new ParameterRenderer<Retirement>("UserId", t => t.UserId),
+        //                new ParameterRenderer<Retirement>("UserName", t => t.UserName),
+        //                //工资科目
+        //                //基本离退休费
+        //                new ParameterRenderer<Retirement>("Basic", t => t.Basic),
+        //                //省批生活补贴
+        //                new ParameterRenderer<Retirement>("ProvincialSubsidy", t => t.ProvincialSubsidy),
+        //                //校内保留
+        //                new ParameterRenderer<Retirement>("Reservation", t => t.Reservation),
+        //                //生贴
+        //                new ParameterRenderer<Retirement>("LivingSubsidy", t => t.LivingSubsidy),
+        //                //国防
+        //                new ParameterRenderer<Retirement>("DefenseSubsidy", t => t.DefenseSubsidy),
+        //                //护教
+        //                new ParameterRenderer<Retirement>("ProtectingEducation", t => t.ProtectingEducation),
+        //                //核补
+        //                new ParameterRenderer<Retirement>("NuclearSubsidy", t => t.NuclearSubsidy),
+        //                //独生子女
+        //                new ParameterRenderer<Retirement>("OnlyChild", t => t.OnlyChild),
+        //                //中人基本养老金
+        //                new ParameterRenderer<Retirement>("MiddleMan", t => t.MiddleMan),
+        //                //津特贴
+        //                new ParameterRenderer<Retirement>("Allowance", t => t.Allowance),
+        //                //护理
+        //                new ParameterRenderer<Retirement>("Nursing", t => t.Nursing),
+        //                //特贴
+        //                new ParameterRenderer<Retirement>("SpecialSubsidy", t => t.SpecialSubsidy),
+        //                //调整的基本养老金
+        //                new ParameterRenderer<Retirement>("AdjustedPension", t => t.AdjustedPension),
+        //                //职业年金
+        //                new ParameterRenderer<Retirement>("OccupationalPension", t => t.OccupationalPension),
+        //                //应发工资
+        //                new ParameterRenderer<Retirement>("Payable", t => t.Payable),
+        //                //房租
+        //                new ParameterRenderer<Retirement>("Rent", t => t.Rent),
+        //                //扣其它
+        //                new ParameterRenderer<Retirement>("Others", t => t.Others),
+        //                //水电
+        //                new ParameterRenderer<Retirement>("Utilities", t => t.Utilities),
+        //                //实发工资
+        //                new ParameterRenderer<Retirement>("Actual", t => t.Actual)
+        //                ));
 
         #endregion
 
@@ -150,7 +141,7 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="filename">保存文件名</param>
         /// <param name="audit">工资审计</param>
-        public Export(string filename, SalaryAudit audit)
+        public Export(string filename, Audit<U,B> audit)
         {
             Filename = filename;
             Audit = audit;

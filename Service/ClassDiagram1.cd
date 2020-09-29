@@ -1,45 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="JournalVoucherAudit.Service.BalanceExtension" Collapsed="true">
-    <Position X="5" Y="1" Width="1.5" />
+  <Comment CommentText="扩展方法，用于计算应发工资与实发工资的累计和小计">
+    <Position X="7.229" Y="3.854" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="导出类，用于将数据导出为excel，并格式化">
+    <Position X="1.637" Y="2.638" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="导入类，用于读取工资报表，映射为在职与离退休">
+    <Position X="3.425" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="审计类，依据规则提取工资变动数据，给出调节表与明细表">
+    <Position X="8.258" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="JournalVoucherAudit.Service.Audit&lt;U, B&gt;" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAKAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>BalanceExtension.cs</FileName>
+      <HashCode>AAAAAAEAAQAAABAAAACAAAgAgBAAAAABAAguEAQAAAA=</HashCode>
+      <FileName>Audit.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Service.Export" Collapsed="true">
-    <Position X="6.75" Y="1" Width="1.5" />
+  <Class Name="JournalVoucherAudit.Service.AuditOfRetirement" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAIEAAIABQACAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>AuditOfRetirement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.AuditOfSalary" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>AuditOfSalary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.Export&lt;U, B&gt;" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAIEAAMABQAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Export.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Service.SalaryAudit" Collapsed="true">
-    <Position X="5" Y="2" Width="1.5" />
+  <Class Name="JournalVoucherAudit.Service.ExportOfRetirement" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAQAAABAAAACAAAgAgBAAAAABAAguEAQAAAA=</HashCode>
-      <FileName>SalaryAudit.cs</FileName>
+      <HashCode>AAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExportOfRetirement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.ExportOfSalary" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExportOfSalary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.Import&lt;U, M&gt;" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAACAAAAAACAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Import.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.ImportOfRetirement" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImportOfRetirement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JournalVoucherAudit.Service.ImportOfSalary" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImportOfSalary.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JournalVoucherAudit.Service.SalaryExtension" Collapsed="true">
-    <Position X="6.75" Y="2" Width="1.5" />
+    <Position X="8" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABAAAA=</HashCode>
       <FileName>SalaryExtension.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JournalVoucherAudit.Service.SalaryImport" Collapsed="true">
-    <Position X="8.5" Y="2" Width="1.5" />
+  <Class Name="JournalVoucherAudit.Service.BalanceExtension" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAACAAAAAACAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
-      <FileName>SalaryImport.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="JournalVoucherAudit.Service.SalaryMap" Collapsed="true">
-    <Position X="5" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>SalaryMap.cs</FileName>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAKAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>BalanceExtension.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="微软雅黑" Size="9" />

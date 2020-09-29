@@ -1,6 +1,5 @@
 ﻿using JournalVoucherAudit.Domain;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 
 namespace JournalVoucherAudit.Service
@@ -12,7 +11,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalancePayableOfLast(this IList<Balance> balances)
+        public static decimal BalancePayableOfLast<U, B>(this IList<B> balances)
+            where U : User, new()
+            where B : Balance<U>
         {
             return balances.Sum(t => t.PayableOfLast);
         }
@@ -21,7 +22,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalancePayableOfCurrent(this IList<Balance> balances)
+        public static decimal BalancePayableOfCurrent<U, B>(this IList<B> balances)
+            where U : User, new()
+            where B : Balance<U>            
         {
             return balances.Sum(t => t.PayableOfCurrent);
         }
@@ -30,7 +33,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalanceActualOfLast(this IList<Balance> balances)
+        public static decimal BalanceActualOfLast<U, B>(this IList<B> balances)
+            where U : User, new() 
+            where B : Balance<U>            
         {
             return balances.Sum(t => t.ActualOfLast);
         }
@@ -39,7 +44,9 @@ namespace JournalVoucherAudit.Service
         /// </summary>
         /// <param name="balances"></param>
         /// <returns></returns>
-        public static decimal BalanceActualOfCurrent(this IList<Balance> balances)
+        public static decimal BalanceActualOfCurrent<U, B>(this IList<B> balances)
+            where U : User, new()
+            where B : Balance<U>            
         {
             return balances.Sum(t => t.ActualOfCurrent);
         }

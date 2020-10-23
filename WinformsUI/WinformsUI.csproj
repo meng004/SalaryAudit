@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>d:\codes\publish\</PublishUrl>
+    <PublishUrl>Y:\Codes\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,7 +26,7 @@
     <ProductName>人事-财务工资核对系统</ProductName>
     <PublisherName>Usc</PublisherName>
     <SuiteName>财务软件</SuiteName>
-    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -76,7 +76,6 @@
     <StartupObject>JournalVoucherAudit.WinformsUI.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExcelMapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -152,20 +151,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{04743619-b121-47a9-821b-0e496ecf716c}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Service\Service.csproj">
-      <Project>{6cb1d6fc-049c-4df5-bd57-9bee28479f60}</Project>
-      <Name>Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{4BC997E1-EE71-4E20-BACC-9F8C0F899D96}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
@@ -177,7 +162,20 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{04743619-b121-47a9-821b-0e496ecf716c}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{6cb1d6fc-049c-4df5-bd57-9bee28479f60}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{4bc997e1-ee71-4e20-bacc-9f8c0f899d96}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.10.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />

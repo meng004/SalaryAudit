@@ -431,7 +431,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+#pragma warning disable CS0108 // '“FrmSalary.Scale”隐藏继承的成员“Control.Scale(float)”。如果是有意隐藏，请使用关键字 new。
         private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
+#pragma warning restore CS0108 // '“FrmSalary.Scale”隐藏继承的成员“Control.Scale(float)”。如果是有意隐藏，请使用关键字 new。
         private System.Windows.Forms.DataGridViewTextBoxColumn Performance;
         private System.Windows.Forms.DataGridViewTextBoxColumn MonthlyReward;
     }

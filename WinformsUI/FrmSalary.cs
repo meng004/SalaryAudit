@@ -303,7 +303,7 @@ namespace JournalVoucherAudit.WinformsUI
             {
                 //导出excel
                 var export = new ExportOfSalary(saveFileDlg.FileName, Audit);
-                //export.Save();
+                export.Save();
                 //提示消息
                 lbl_Message.Text = Resources.ResultMessage;
             }
